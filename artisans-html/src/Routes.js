@@ -1,6 +1,6 @@
 import Home from './components/pages/Home';
-import RequiredKnowledge from './components/pages/get-started/RequiredKnowledge';
-import Themes from './components/pages/customization/Themes';
+import RequiredKnowledge from './components/pages/search';
+import Results from './components/pages/results';
 
 
 export default {
@@ -20,7 +20,7 @@ export default {
     },
     results: {
         path: 'results',
-        component: Themes, fullpath: '/results'
+        component: Results, fullpath: '/results'
     }
 
 }

@@ -3,10 +3,12 @@ import HomeFeature from './HomeFeature';
 import FullWidthSection from '../FullWidthSection';
 import RaisedButton from 'material-ui/RaisedButton';
 import withWidth, {LARGE} from 'material-ui/utils/withWidth';
-import spacing from 'material-ui/styles/spacing';
 import typography from 'material-ui/styles/typography';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import {cyan500, grey200, darkWhite} from 'material-ui/styles/colors';
+import ThemeApp from '../ThemeApp';
+import {grey200, darkWhite, white} from 'material-ui/styles/colors';
+
+import Routes from '../../Routes';
+import 'font-awesome/css/font-awesome.css';
 
 class HomePage extends Component {
 
@@ -21,13 +23,17 @@ class HomePage extends Component {
   homePageHero() {
     const styles = {
       root: {
-        backgroundColor: cyan500,
+        backgroundColor: ThemeApp.drawer.header.color,
         overflow: 'hidden',
       },
+      imgContainer: {
+        display: 'flex',
+        justifyContent: 'center'
+      },
       svgLogo: {
-        marginLeft: window.innerWidth * 0.5 - 130,
-        width: 420,
-        height: 157,
+        // marginLeft: window.innerWidth * 0.5 - 130,
+        // width: 420,
+        // height: 157,
       },
       tagline: {
         margin: '16px auto 0 auto',
@@ -35,7 +41,7 @@ class HomePage extends Component {
         maxWidth: 575,
       },
       label: {
-        color: lightBaseTheme.palette.primary1Color,
+        color: ThemeApp.muiTheme.palette.primary1Color,
       },
       githubStyle: {
         margin: '16px 32px 0px 8px',
@@ -81,17 +87,18 @@ class HomePage extends Component {
 
     return (
       <FullWidthSection style={styles.root}>
-        <img style={styles.svgLogo} src="images/material-ui-logo.svg" />
+        <div style={styles.imgContainer}>
+          <img style={styles.svgLogo} src="/img/landing.jpg"/>
+        </div>
         <div style={styles.tagline}>
-          <h1 style={styles.h1}>Material-UI</h1>
+          <h1 style={styles.h1}>Artisans</h1>
           <h2 style={styles.h2}>
-            A Set of React Components <span style={styles.nowrap}>
-            that Implement</span> <span style={styles.nowrap}>
-            Google&apos;s Material Design</span>
+            Rechercher un artisan <span style={styles.nowrap}>
+            Près de chez vous</span>
           </h2>
           <RaisedButton
             className="demo-button"
-            label="Demo"
+            label="Rechercher"
             onTouchTap={this.handleTouchTapDemo}
             style={styles.demoStyle}
             labelStyle={styles.label}
@@ -131,7 +138,7 @@ class HomePage extends Component {
         Material-UI came about from our love of&nbsp;
         <a href="http://facebook.github.io/react/">React</a> and&nbsp;
         <a href="https://www.google.com/design/spec/material-design/introduction.html">
-         Google's Material Design
+          Google's Material Design
         </a>. We're currently using it on a project at&nbsp;
         <a href="https://www.call-em-all.com/Careers">Call-Em-All</a> and plan on adding to it
         and making it better in the coming months.
@@ -145,20 +152,20 @@ class HomePage extends Component {
     return (
       <FullWidthSection useContent={true} contentStyle={styles}>
         <HomeFeature
-          heading="Get Started"
-          route="/get-started"
-          img="images/get-started.svg"
+          heading="Rechercher"
+          route="/search"
+          img="/img/landing_rechercher.jpg"
           firstChild={true}
         />
         <HomeFeature
-          heading="Customization"
-          route="/customization"
-          img="images/css-framework.svg"
+          heading="Sélectionner"
+          route="/results"
+          img="/img/landing_selectionner.jpg"
         />
         <HomeFeature
-          heading="Components"
-          route="/components"
-          img="images/components.svg"
+          heading="Contacter"
+          route="/"
+          img="/img/landing_contacter.jpg"
           lastChild={true}
         />
       </FullWidthSection>
@@ -179,32 +186,40 @@ class HomePage extends Component {
       },
       button: {
         marginTop: 32,
+       margin:5
       },
     };
 
     return (
       <FullWidthSection useContent={true} style={styles.root}>
         <h3 style={styles.h3}>
-          Want to help make this <span style={styles.nowrap}>project awesome? </span>
-          <span style={styles.nowrap}>Check out our repo.</span>
+          <span style={styles.nowrap}>Partager nous sur vos réseaux sociaux !!!</span>
         </h3>
         <RaisedButton
-          label="GitHub"
+          label="Facebook"
           primary={true}
+          icon={<i className="fa fa-facebook-square fa-2x" aria-hidden="true" style={{color: white}} />}
           href="https://github.com/callemall/material-ui"
           style={styles.button}
         />
-      </FullWidthSection>
+        <RaisedButton
+          label="Twitter"
+          primary={true}
+          icon={<i className="fa fa-twitter-square fa-2x" aria-hidden="true" style={{color: white}} />}
+          href="https://github.com/callemall/material-ui"
+          style={styles.button}
+        />
+      </FullWidthSection >
     );
   }
 
   handleTouchTapDemo = () => {
-    this.context.router.push('/components');
+    this.context.router.push(Routes.search.fullpath);
   };
 
   render() {
     const style = {
-      paddingTop: spacing.desktopKeylineIncrement,
+      paddingTop: 0,
     };
 
     return (

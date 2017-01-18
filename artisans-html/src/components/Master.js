@@ -3,11 +3,15 @@ import Title from 'react-title-component';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import spacing from 'material-ui/styles/spacing';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {darkWhite, lightWhite, grey900} from 'material-ui/styles/colors';
 import AppNavDrawer from './AppNavDrawer';
 import FullWidthSection from './FullWidthSection';
 import withWidth, {MEDIUM, LARGE} from 'material-ui/utils/withWidth';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import ThemeApp from './ThemeApp';
+
 
 class Master extends Component {
   static propTypes = {
@@ -144,16 +148,17 @@ class Master extends Component {
 
     const router = this.context.router;
     const styles = this.getStyles();
+    const homeIsActive = router.isActive('/home');
+    const defaultLabel = 'Artisans App';
     const title =
-      router.isActive('/get-started') ? 'Get Started' :
-      router.isActive('/customization') ? 'Customization' :
-      router.isActive('/components') ? 'Components' :
-      router.isActive('/discover-more') ? 'Discover More' : '';
+      router.isActive('/search') ? 'Rechercher' :
+        router.isActive('/results') ? 'Résultat' :
+          homeIsActive ? 'Accueil' : defaultLabel;
 
     let docked = false;
     let showMenuIconButton = true;
 
-    if (this.props.width === LARGE && title !== '') {
+    if (this.props.width === LARGE && title !== defaultLabel) {
       docked = true;
       navDrawerOpen = true;
       showMenuIconButton = false;
@@ -166,67 +171,62 @@ class Master extends Component {
     }
 
     return (
-      <div>
-        <Title render="Material-UI" />
-        <AppBar
-          onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
-          title={title}
-          zDepth={0}
-          iconElementRight={
+      <MuiThemeProvider muiTheme={ThemeApp.muiTheme}>
+        <div>
+          <Title render="Artisans"/>
+          <AppBar onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
+                  title={title} zDepth={1} iconElementRight={
+            <IconButton iconClassName="muidocs-icon-custom-github" href="https://github.com/callemall/material-ui"
+            />
+          }
+                  style={styles.appBar} showMenuIconButton={showMenuIconButton}/>
+          { title !== defaultLabel ?
+            <div style={prepareStyles(styles.root)}>
+              <div style={prepareStyles(styles.content)}>
+                {React.cloneElement(children, {
+                  onChangeMuiTheme: this.handleChangeMuiTheme,
+                })}
+              </div>
+            </div> :
+            children
+          }
+          <AppNavDrawer
+            style={styles.navDrawer}
+            location={location}
+            docked={docked}
+            onRequestChangeNavDrawer={this.handleChangeRequestNavDrawer}
+            onChangeList={this.handleChangeList}
+            open={navDrawerOpen}
+          />
+          <FullWidthSection style={styles.footer}>
+            <p style={prepareStyles(styles.p)}>
+              {'Hand crafted with love by the engineers at '}
+              <a style={styles.a} href="http://www.call-em-all.com/Careers">
+                Call-Em-All
+              </a>
+              {' and our awesome '}
+              <a
+                style={prepareStyles(styles.a)}
+                href="https://github.com/callemall/material-ui/graphs/contributors"
+              >
+                contributors
+              </a>.
+            </p>
             <IconButton
+              iconStyle={styles.iconButton}
               iconClassName="muidocs-icon-custom-github"
               href="https://github.com/callemall/material-ui"
             />
-          }
-          style={styles.appBar}
-          showMenuIconButton={showMenuIconButton}
-        />
-        {title !== '' ?
-          <div style={prepareStyles(styles.root)}>
-            <div style={prepareStyles(styles.content)}>
-              {React.cloneElement(children, {
-                onChangeMuiTheme: this.handleChangeMuiTheme,
-              })}
-            </div>
-          </div> :
-          children
-        }
-        <AppNavDrawer
-          style={styles.navDrawer}
-          location={location}
-          docked={docked}
-          onRequestChangeNavDrawer={this.handleChangeRequestNavDrawer}
-          onChangeList={this.handleChangeList}
-          open={navDrawerOpen}
-        />
-        <FullWidthSection style={styles.footer}>
-          <p style={prepareStyles(styles.p)}>
-            {'Hand crafted with love by the engineers at '}
-            <a style={styles.a} href="http://www.call-em-all.com/Careers">
-              Call-Em-All
-            </a>
-            {' and our awesome '}
-            <a
-              style={prepareStyles(styles.a)}
-              href="https://github.com/callemall/material-ui/graphs/contributors"
-            >
-              contributors
-            </a>.
-          </p>
-          <IconButton
-            iconStyle={styles.iconButton}
-            iconClassName="muidocs-icon-custom-github"
-            href="https://github.com/callemall/material-ui"
-          />
-          <p style={prepareStyles(styles.browserstack)}>
-            {'Thank you to '}
-            <a href="https://www.browserstack.com" style={prepareStyles(styles.browserstackLogo)} target="_blank">
-              <img src="http://www.browserstack.com/images/layout/logo.png" height="25" width="auto" />
-            </a>
-            {' for providing real browser testing infrastructure.'}
-          </p>
-        </FullWidthSection>
-      </div>
+            <p style={prepareStyles(styles.browserstack)}>
+              {'Thank you to '}
+              <a href="https://www.browserstack.com" style={prepareStyles(styles.browserstackLogo)} target="_blank">
+                <img src="http://www.browserstack.com/images/layout/logo.png" height="25" width="auto"/>
+              </a>
+              {' for providing real browser testing infrastructure.'}
+            </p>
+          </FullWidthSection>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
