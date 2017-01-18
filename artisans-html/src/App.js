@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Router, Route, IndexRoute, Redirect, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 // Here we define all our material-ui ReactComponents.

@@ -206,22 +206,16 @@ class Master extends Component {
               Call-Em-All
             </a>
             {' and our awesome '}
-            <a
-              style={prepareStyles(styles.a)}
-              href="https://github.com/callemall/material-ui/graphs/contributors"
-            >
+            <a style={prepareStyles(styles.a)}  href="https://github.com/callemall/material-ui/graphs/contributors" >
               contributors
             </a>.
           </p>
-          <IconButton
-            iconStyle={styles.iconButton}
-            iconClassName="muidocs-icon-custom-github"
-            href="https://github.com/callemall/material-ui"
-          />
+          <IconButton iconStyle={styles.iconButton} iconClassName="muidocs-icon-custom-github"
+            href="https://github.com/callemall/material-ui" />
           <p style={prepareStyles(styles.browserstack)}>
             {'Thank you to '}
             <a href="https://www.browserstack.com" style={prepareStyles(styles.browserstackLogo)} target="_blank">
-              <img src="http://www.browserstack.com/images/layout/logo.png" height="25" width="auto" />
+              <img alt="logo browserstack" src="http://www.browserstack.com/images/layout/logo.png" height="25" width="auto" />
             </a>
             {' for providing real browser testing infrastructure.'}
           </p>
