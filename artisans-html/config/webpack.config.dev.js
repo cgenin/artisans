@@ -111,7 +111,6 @@ module.exports = {
           /\.(js|jsx)$/,
           /\.css$/,
           /\.md$/,
-          /\.scss$/,
           /\.json$/,
           /\.svg$/
         ],
@@ -153,12 +152,6 @@ module.exports = {
         test: /\.md$/,
         loader: 'raw-loader',
       },
-      {
-        test: /\.scss$/,
-        // include: paths.appSrc,
-        loaders: ["style", "css", "sass"]
-      },
-
       // "file" loader for svg
       {
         test: /\.svg$/,
