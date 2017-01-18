@@ -357,7 +357,7 @@ class Results extends Component {
 
     return (
       <div>
-        <Title render={(previousTitle) => `Themes - ${previousTitle}`} />
+        <Title render={(previousTitle) => `Résultats`} />
         <MarkdownElement text={markdownText} />
         <Paper style={styles.liveExamplePaper}>
           <ClearFix style={styles.liveExampleBlock}>{this.getThemeExamples()}</ClearFix>

@@ -86,7 +86,7 @@ class AppNavDrawer extends Component {
         <ListItem primaryText="1. Rechercher" href={Routes.search.fullpath}
                   onClick={this.goToPage(Routes.search.fullpath)}
                   onTouchTap={this.goToPage(Routes.search.fullpath)}/>
-        <ListItem primaryText="2. Résultats" href={Routes.results.fullpath}
+        <ListItem primaryText="2. Sélectionner" href={Routes.results.fullpath}
                   onClick={this.goToPage(Routes.results.fullpath)}
                   onTouchTap={this.goToPage(Routes.results.fullpath)}/>
 

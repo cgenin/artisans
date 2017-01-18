@@ -3,15 +3,19 @@ import Title from 'react-title-component';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import spacing from 'material-ui/styles/spacing';
-import {darkWhite, lightWhite, grey900} from 'material-ui/styles/colors';
+import {darkWhite, lightWhite, grey900, white} from 'material-ui/styles/colors';
 import AppNavDrawer from './AppNavDrawer';
 import FullWidthSection from './FullWidthSection';
 import withWidth, {MEDIUM, LARGE} from 'material-ui/utils/withWidth';
-
+import ActionBuild from 'material-ui/svg-icons/action/build';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import ThemeApp from './ThemeApp';
 
+const iconStyles = {
+  margin: 10,
+  color: white
+};
 
 class Master extends Component {
   static propTypes = {
@@ -149,16 +153,15 @@ class Master extends Component {
     const router = this.context.router;
     const styles = this.getStyles();
     const homeIsActive = router.isActive('/home');
-    const defaultLabel = 'Artisans App';
     const title =
       router.isActive('/search') ? 'Rechercher' :
         router.isActive('/results') ? 'Résultat' :
-          homeIsActive ? 'Accueil' : defaultLabel;
+          homeIsActive ? 'Accueil' : '';
 
     let docked = false;
     let showMenuIconButton = true;
 
-    if (this.props.width === LARGE && title !== defaultLabel) {
+    if (this.props.width === LARGE && title !== '') {
       docked = true;
       navDrawerOpen = true;
       showMenuIconButton = false;
@@ -176,11 +179,10 @@ class Master extends Component {
           <Title render="Artisans"/>
           <AppBar onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
                   title={title} zDepth={1} iconElementRight={
-            <IconButton iconClassName="muidocs-icon-custom-github" href="https://github.com/callemall/material-ui"
-            />
+            <ActionBuild style={iconStyles}/>
           }
                   style={styles.appBar} showMenuIconButton={showMenuIconButton}/>
-          { title !== defaultLabel ?
+          { title !== '' ?
             <div style={prepareStyles(styles.root)}>
               <div style={prepareStyles(styles.content)}>
                 {React.cloneElement(children, {
