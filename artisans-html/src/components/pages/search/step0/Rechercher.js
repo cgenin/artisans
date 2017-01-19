@@ -5,14 +5,14 @@ import TextField from 'material-ui/TextField';
 import {connect} from 'react-redux';
 
 import HelpModal from '../../../help-modal/HelpModal'
-import search from './rechercher.md';
+import search from '../rechercher.md';
 import rechercherImg from './rechercher-bubble.svg';
 import Routes from '../../../../Routes';
 import {step1} from '../../../../redux/rechercher/actions';
 
 const mapStateToProps = (state) => {
-  const {rechercher} = state;
-  return {rechercher};
+  const {search} = state.rechercher;
+  return {search};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class Rechercher extends Component {
   static propTypes = {
-
+    search: PropTypes.string
   };
   static contextTypes = {
     router: PropTypes.object.isRequired,
@@ -40,6 +40,11 @@ class Rechercher extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    const search = this.props.search || '';
+    this.setState({search})
+  }
+
   handleChange(event) {
     this.setState({
       search: event.target.value,
@@ -50,9 +55,7 @@ class Rechercher extends Component {
     if (evt) {
       evt.preventDefault();
     }
-    this.props.onValidate(this.state.search).then(
-      () => this.context.router.push(Routes.search.step1.fullpath)
-    );
+    this.context.router.push(Routes.search.step1.fullpath(this.state.search))
   }
 
 
@@ -66,7 +69,8 @@ class Rechercher extends Component {
           </CardMedia>
           <CardText>
             <TextField floatingLabelFixed={true} floatingLabelText="Taper votre recherche ici"
-                       value={this.state.search} onChange={this.handleChange}   hintText="Ex: vitreur, peinture, etc ..." fullWidth={true}/>
+                       value={this.state.search} onChange={this.handleChange} hintText="Ex: vitreur, peinture, etc ..."
+                       fullWidth={true}/>
           </CardText>
           <CardActions className="rechercher-card-actions">
             <HelpModal text={search}/>

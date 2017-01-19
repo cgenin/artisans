@@ -25,9 +25,9 @@ export default {
       fullpath: '/search/step0',
     },
     step1: {
-      path: 'step1',
+      path: 'step1/:search',
       component: SelectionRechercher,
-      fullpath: '/search/step1',
+      fullpath: (s) => `/search/step1/${s}`,
     }
   },
   results: {

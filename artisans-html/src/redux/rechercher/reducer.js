@@ -2,7 +2,8 @@ import {STEP0, STEP1, STEP2, STEP3} from './actions';
 
 const defaultState = {
   step: 0,
-  search:''
+  artisans: [],
+  search: ''
 };
 
 const changeStep = (state, step) => {
@@ -18,6 +19,7 @@ export default function reducer(state = defaultState, action) {
     case STEP1:
       const changeStep2 = changeStep(state, 1);
       changeStep2.search = action.search;
+      changeStep2.artisans = action.artisans;
       return changeStep2;
     case STEP2:
       return changeStep(state, 2);

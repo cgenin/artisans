@@ -1,0 +1,32 @@
+[
+  {
+    "type": "ART",
+    "sub": 4,
+    "group": "artisans",
+    "label": "Maçonnerie"
+  },
+  {
+    "type": "ART",
+    "sub": 3,
+    "group": "artisans",
+    "label": "Peinture"
+  },
+  {
+    "type": "GAR",
+    "sub": 2,
+    "group": "Garage",
+    "label": "Carrossier"
+  },
+  {
+    "type": "VIT",
+    "sub": 1,
+    "group": "Vitreur",
+    "label": "Bris de glace"
+  },
+  {
+    "type": "VIT",
+    "sub": 1,
+    "group": "Vitreur",
+    "label": "Vitreur"
+  }
+]

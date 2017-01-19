@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch';
 export const STEP0 = 'rechercher:step0';
 export const STEP1 = 'rechercher:step1';
 export const STEP2 = 'rechercher:step2';
@@ -15,13 +16,12 @@ export function step0() {
 
 export function step1(search) {
   return dispatch => {
-    return new Promise((resolve) => {
-      dispatch({
-        type: STEP1, search
-      });
-      resolve(true);
-    });
-  }
+    return fetch('/artisans-type.json')
+      .then(
+        res => res.json()
+      )
+      .then(artisans => dispatch({type: STEP1, search, artisans}));
+  };
 }
 
 export function step2() {
