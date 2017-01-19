@@ -6,7 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import withWidth, {SMALL} from 'material-ui/utils/withWidth';
 import typography from 'material-ui/styles/typography';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import themesText from './themes.md';
+import themesText from './results.md';
 import ClearFix from 'material-ui/internal/ClearFix';
 
 import {
@@ -39,7 +39,7 @@ You can use the tabs to change the theme. The changes will be applied to the who
 documentation.
 `;
 
-class ThemesPage extends Component {
+class Results extends Component {
   static propTypes = {
     muiTheme: PropTypes.object,
     onChangeMuiTheme: PropTypes.func,
@@ -357,7 +357,7 @@ class ThemesPage extends Component {
 
     return (
       <div>
-        <Title render={(previousTitle) => `Themes - ${previousTitle}`} />
+        <Title render={(previousTitle) => `Résultats`} />
         <MarkdownElement text={markdownText} />
         <Paper style={styles.liveExamplePaper}>
           <ClearFix style={styles.liveExampleBlock}>{this.getThemeExamples()}</ClearFix>
@@ -370,4 +370,4 @@ class ThemesPage extends Component {
   }
 }
 
-export default muiThemeable()(withWidth()(ThemesPage));
+export default muiThemeable()(withWidth()(Results));
