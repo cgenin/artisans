@@ -1,26 +1,33 @@
 import React, {Component, PropTypes} from 'react';
 import Title from 'react-title-component';
 import withWidth from 'material-ui/utils/withWidth';
+import { connect } from 'react-redux';
+
 import Breadcrumbs from '../../breadcrumbs/Breadcrumbs'
 import './search.css';
 
-
+const mapStateToProps = (state) => {
+  const {step} = state.rechercher;
+  return {
+    step
+  };
+};
 
 class Search extends Component {
 
-    static propTypes = {
-        children: PropTypes.array.isRequired,
-    };
+  static propTypes = {
+    children: PropTypes.object.isRequired,
+  };
 
-    render() {
+  render() {
     return (
       <div>
         <Title render={(previousTitle) => `Rechercher - Artisans`}/>
-        <Breadcrumbs index={0} />
-          {this.props.children}
+        <Breadcrumbs index={this.props.step}/>
+        {this.props.children}
       </div>
     );
   }
 }
 
-export default withWidth()(Search);
+export default connect(mapStateToProps)(withWidth()(Search));
