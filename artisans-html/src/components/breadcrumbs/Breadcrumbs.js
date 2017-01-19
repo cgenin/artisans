@@ -6,6 +6,10 @@ import './Breadcrumbs.css';
 
 class Breadcrumbs extends Component {
 
+    static propTypes = {
+        index: PropTypes.number.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);

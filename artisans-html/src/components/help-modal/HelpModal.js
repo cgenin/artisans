@@ -7,31 +7,36 @@ import MarkdownElement from '../MarkdownElement';
 
 
 class HelpModal extends Component {
-  state = {
-    open: false,
-  };
+    static propTypes = {
+        text: PropTypes.string.isRequired,
+    };
 
-  handleOpen = () => {
-    this.setState({open: true});
-  };
 
-  handleClose = () => {
-    this.setState({open: false});
-  };
+    state = {
+        open: false,
+    };
 
-  render() {
-    return (
-      <div>
-        <IconButton tooltip="Aide" onTouchTap={this.handleOpen}>
-          <ActionHelpOutline />
-        </IconButton>
-        <Dialog title="De l'aide ?"
-          actions={ <FlatButton label="Fermer" onTouchTap={this.handleClose}/>}
-          modal={false} open={this.state.open}  onRequestClose={this.handleClose} >
-          <MarkdownElement text={this.props.text}/>
-        </Dialog>
-      </div>);
-  }
+    handleOpen = () => {
+        this.setState({open: true});
+    };
+
+    handleClose = () => {
+        this.setState({open: false});
+    };
+
+    render() {
+        return (
+            <div>
+                <IconButton tooltip="Aide" onTouchTap={this.handleOpen}>
+                    <ActionHelpOutline />
+                </IconButton>
+                <Dialog title="De l'aide ?"
+                        actions={ <FlatButton label="Fermer" onTouchTap={this.handleClose}/>}
+                        modal={false} open={this.state.open} onRequestClose={this.handleClose}>
+                    <MarkdownElement text={this.props.text}/>
+                </Dialog>
+            </div>);
+    }
 }
 
 export default HelpModal;

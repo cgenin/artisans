@@ -2204,6 +2204,10 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "http://10.1.1.126:8081/nexus/repository/npm-all/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "http://10.1.1.126:8081/nexus/repository/npm-all/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+
 for-in@^0.1.5:
   version "0.1.6"
   resolved "http://10.1.1.126:8081/nexus/repository/npm-all/for-in/-/for-in-0.1.6.tgz#c9f96e89bfad18a545af5ec3ed352a1d9e5b4dc8"
@@ -4342,6 +4346,13 @@ react-addons-create-fragment@^15.0.0:
 react-addons-css-transition-group@^15.4.2:
   version "15.4.2"
   resolved "http://10.1.1.126:8081/nexus/repository/npm-all/react-addons-css-transition-group/-/react-addons-css-transition-group-15.4.2.tgz#b7828834dfa14229fe07750e331e8a8cb6fb7745"
+  dependencies:
+    fbjs "^0.8.4"
+    object-assign "^4.1.0"
+
+react-addons-pure-render-mixin@^15.4.2:
+  version "15.4.2"
+  resolved "http://10.1.1.126:8081/nexus/repository/npm-all/react-addons-pure-render-mixin/-/react-addons-pure-render-mixin-15.4.2.tgz#a8433c71c45e2368503721921dc47bdaf1fbabcd"
   dependencies:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
