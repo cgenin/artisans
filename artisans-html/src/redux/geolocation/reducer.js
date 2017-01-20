@@ -1,5 +1,7 @@
 import {DEB, START, RESULTS, ERROR} from './actions';
 
+const key = require('../keys.json');
+
 const defaultState = {
   CST_START: 1,
   CST_DEB: 0,
@@ -7,7 +9,7 @@ const defaultState = {
   CST_ERROR: 3,
   step: 0,
   results: {},
-  msg: {}
+  msg: {}, key
 };
 
 export default function reducer(state = defaultState, action) {

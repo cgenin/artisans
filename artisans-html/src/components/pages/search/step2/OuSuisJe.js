@@ -10,9 +10,10 @@ import search from '../rechercher.md';
 import rechercherImg from './ousuisje-bubble.svg';
 import Routes from '../../../../Routes';
 import {step3, step2} from '../../../../redux/rechercher/actions';
-import './OuSuisJe.css'
-import ThemeApp from '../../../ThemeApp'
-import Geolocation from './Geolocation'
+import './OuSuisJe.css';
+import ThemeApp from '../../../ThemeApp';
+import Geolocation from './Geolocation';
+import Adresse from './Adresse';
 
 const mapStateToProps = (state) => {
   const {artisans, search} = state.rechercher;
@@ -79,7 +80,7 @@ class Rechercher extends Component {
               </Tab>
               <Tab style={{backgroundColor:ThemeApp.drawer.header.color}} label="Adresse">
                 <div className="tab-signature">
-
+                  <Adresse/>
                 </div>
               </Tab>
             </Tabs>
