@@ -25,13 +25,15 @@ export function step1(search) {
 }
 
 export function step2() {
-  return {
-    type: STEP2
+  return dispatch => {
+    dispatch({type: STEP2});
+    return Promise.resolve(true);
   };
 }
 
 export function step3() {
-  return {
-    type: STEP3
+  return dispatch => {
+    dispatch({type: STEP3});
+    return Promise.resolve(true);
   };
 }

@@ -30,7 +30,7 @@ class Breadcrumbs extends Component {
                         <StepLabel><span className="breadcrumb-label">Le lieux</span></StepLabel>
                     </Step>
                     <Step>
-                        <StepLabel><span className="breadcrumb-label">Sélection</span></StepLabel>
+                        <StepLabel><span className="breadcrumb-label">Confirmer</span></StepLabel>
                     </Step>
                 </Stepper>
             </div>

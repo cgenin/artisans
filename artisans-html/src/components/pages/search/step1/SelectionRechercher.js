@@ -55,14 +55,25 @@ class SelectionRechercher extends Component {
     this.props.back().then(
       () => this.context.router.push(Routes.search.step0.fullpath)
     );
+  }
 
+  onValidate(artisan) {
+    return (evt) => {
+      if (evt) {
+        evt.preventDefault();
+      }
+      this.props.onValidate(artisan.sub)
+        .then(
+          () => this.context.router.push(Routes.search.step2.fullpath(artisan.sub))
+        );
+    }
   }
 
   render() {
     const title = `Recherche de : '${this.props.search}'`;
     const arts = this.props.artisans.map((a, i) =>
       <ListItem key={i} primaryText={a.label} leftIcon={<ContentSend />}
-                secondaryText={a.group}/>
+                onTouchTap={this.onValidate(a)} secondaryText={a.group}/>
     );
     return (
       <div className="speech-bubble-container">
