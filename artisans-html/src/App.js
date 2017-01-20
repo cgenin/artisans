@@ -12,12 +12,13 @@ import logMiddleware from 'redux-logger';
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 
 import rechercher from './redux/rechercher/reducer';
+import geolocation from './redux/geolocation/reducer';
 
 injectTapEventPlugin();
 
 
 const rootReducer = combineReducers(Object.assign({}, {
-  rechercher
+  rechercher, geolocation
 }));
 
 export const store = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development')
