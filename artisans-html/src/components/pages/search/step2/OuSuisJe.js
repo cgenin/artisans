@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardMedia,  CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {connect} from 'react-redux';
 import {Tabs, Tab} from 'material-ui/Tabs';

@@ -3,8 +3,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Paper from 'material-ui/Paper';
 import {connect} from 'react-redux';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 
 import {launch} from '../../../../redux/geolocation/actions'
+import MiniMap from './MiniMap';
 
 const mapStateToProps = (state) => {
   const {geolocation} = state;
@@ -26,13 +29,9 @@ const convert = (geol, onLaunch) => {
         <CircularProgress size={80} thickness={5}/>
       );
     case geol.CST_RESULTS:
-      const src = `https://www.google.com/maps/embed/v1/view?key=${geol.key.googleApi}&center=${geol.results.lat},${geol.results.lon}&zoom=18`
       return (
         <Paper>
-          <iframe
-            width="326"
-            height="245"
-            frameBorder="0" style={{border: 0}} src={src} allowFullScreen/>
+          <MiniMap googleApi={geol.key.googleApi} lat={geol.results.lat} lon={geol.results.lon}/>
           <div className="geolocalisation-results-button-panel">
             <strong>latitude : {geol.results.lat} / longitude : {geol.results.lon}</strong>
           </div>
@@ -52,7 +51,6 @@ const convert = (geol, onLaunch) => {
           flexDirection: 'column'
         }}>
           <Paper style={{
-            height: 100,
             width: 30,
             height: 30,
             margin: 5,
@@ -72,9 +70,14 @@ const convert = (geol, onLaunch) => {
 };
 
 class Geolocation extends Component {
+  static propTypes = {
+    geolocation: PropTypes.object.isRequired,
+    onLaunch: PropTypes.func.isRequired,
+  };
 
   constructor(props) {
     super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
   render() {

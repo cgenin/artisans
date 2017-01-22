@@ -88,7 +88,7 @@ class HomePage extends Component {
     return (
       <FullWidthSection style={styles.root}>
         <div style={styles.imgContainer}>
-          <img style={styles.svgLogo} src="/img/landing.jpg"/>
+          <img role="presentation" style={styles.svgLogo} src="/img/landing.jpg"/>
         </div>
         <div style={styles.tagline}>
           <h1 style={styles.h1}>Artisans</h1>

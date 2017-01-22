@@ -8,6 +8,7 @@ const defaultState = {
   CST_RESULTS: 2,
   CST_ERROR: 3,
   step: 0,
+  position: {},
   results: {},
   msg: {}, key
 };
@@ -16,14 +17,14 @@ export default function reducer(state = defaultState, action) {
   const cl = Object.assign({}, state);
   switch (action.type) {
     case DEB:
-      return defaultState;
+      return cl;
     case START:
       cl.step = cl.CST_START;
+      cl.position = action.position;
       return cl;
     case RESULTS:
       cl.step = cl.CST_RESULTS;
-      const {lat, lon} = action;
-      cl.results = {lat, lon};
+      cl.results = action.res;
       return cl;
     case ERROR:
       cl.step = cl.CST_ERROR;
@@ -33,5 +34,4 @@ export default function reducer(state = defaultState, action) {
     default:
       return state;
   }
-
 }

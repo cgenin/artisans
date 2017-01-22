@@ -1,4 +1,4 @@
-.tab-signature{
+.tab-signature {
     min-height: 25vh;
     display: flex;
     justify-content: center;
@@ -6,8 +6,15 @@
     align-items: center;
 }
 
-.geolocalisation-results-button-panel{
+.geolocalisation-results-button-panel {
     display: flex;
     justify-content: space-around;
-    margin:5px;
+    margin: 5px;
+}
+
+.addresse-form-panel {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
