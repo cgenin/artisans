@@ -1,8 +1,14 @@
 import React, {Component, PropTypes} from 'react';
-import {Card, CardActions, CardHeader, CardMedia,  CardText} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import Card  from 'material-ui/Card/Card';
+import  CardActions  from 'material-ui/Card/CardActions';
+import  CardHeader  from 'material-ui/Card/CardHeader';
+import  CardMedia from 'material-ui/Card/CardMedia';
+import  CardText from 'material-ui/Card/CardText';
+import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
+import Tabs  from 'material-ui/Tabs/Tabs';
+import   Tab from 'material-ui/Tabs/Tab';
 import {connect} from 'react-redux';
-import {Tabs, Tab} from 'material-ui/Tabs';
+
 
 
 import HelpModal from '../../../help-modal/HelpModal'

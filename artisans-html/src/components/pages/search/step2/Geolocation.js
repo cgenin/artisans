@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import CircularProgress from 'material-ui/CircularProgress';
-import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress/CircularProgress';
+import Paper from 'material-ui/Paper/Paper';
 import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import CircularProgress from 'material-ui/CircularProgress';
+import TextField from 'material-ui/TextField/TextField';
+import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress/CircularProgress';
 import {connect} from 'react-redux';
 
 import {launch} from '../../../../redux/adress/actions'

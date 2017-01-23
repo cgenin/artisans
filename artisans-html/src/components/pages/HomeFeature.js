@@ -5,7 +5,7 @@ import spacing from 'material-ui/styles/spacing';
 import transitions from 'material-ui/styles/transitions';
 import typography from 'material-ui/styles/typography';
 import {grey200} from 'material-ui/styles/colors';
-import Paper from 'material-ui/Paper';
+import Paper from 'material-ui/Paper/Paper';
 
 class HomeFeature extends Component {
 

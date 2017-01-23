@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import IconButton from 'material-ui/IconButton';
-import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton/IconButton';
+import FlatButton from 'material-ui/FlatButton/FlatButton';
 import ActionHelpOutline from 'material-ui/svg-icons/action/help-outline';
-import Dialog from 'material-ui/Dialog';
+import Dialog from 'material-ui/Dialog/Dialog';
 import MarkdownElement from '../MarkdownElement';
 
 

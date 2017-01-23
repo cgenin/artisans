@@ -1,9 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import Drawer from 'material-ui/Drawer';
-import {List, ListItem, makeSelectable} from 'material-ui/List';
+import List from 'material-ui/List/List';
+import ListItem  from 'material-ui/List/ListItem';
+import  makeSelectable  from 'material-ui/List/makeSelectable';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
-import {spacing, typography, zIndex} from 'material-ui/styles';
+import spacing from 'material-ui/styles/spacing';
+import  typography from 'material-ui/styles/typography';
+import zIndex from 'material-ui/styles/zIndex';
 import ThemeApp from './ThemeApp';
 
 

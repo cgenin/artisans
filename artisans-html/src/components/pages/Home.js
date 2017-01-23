@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import HomeFeature from './HomeFeature';
 import FullWidthSection from '../FullWidthSection';
-import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import withWidth, {LARGE} from 'material-ui/utils/withWidth';
 import typography from 'material-ui/styles/typography';
 import ThemeApp from '../ThemeApp';

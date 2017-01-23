@@ -1,8 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import {List, ListItem} from 'material-ui/List';
+import Card  from 'material-ui/Card/Card';
+import  CardActions  from 'material-ui/Card/CardActions';
+import  CardHeader  from 'material-ui/Card/CardHeader';
+import  CardText from 'material-ui/Card/CardText';
+import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
+import List  from 'material-ui/List/List';
+import  ListItem from 'material-ui/List/ListItem';
 import ContentSend from 'material-ui/svg-icons/content/send';
 
 import HelpModal from '../../../help-modal/HelpModal'

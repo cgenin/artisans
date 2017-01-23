@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Title from 'react-title-component';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
+import AppBar from 'material-ui/AppBar/AppBar';
+import IconButton from 'material-ui/IconButton/IconButton';
 import spacing from 'material-ui/styles/spacing';
 import {darkWhite, lightWhite, grey900, white} from 'material-ui/styles/colors';
 import AppNavDrawer from './AppNavDrawer';
