@@ -45,3 +45,6 @@ fabric.properties
 
 *.iml
 
+mdpa-parser/datas.json
+mdpa-parser/target
+
