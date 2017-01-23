@@ -26,8 +26,8 @@ export default function reducer(state = defaultState, action) {
       cl.step = cl.CST_RESULTS;
       if (action.res.features.length > 0) {
         const feature = action.res.features[0];
-        cl.results.lat = feature.geometry.coordinates[0];
-        cl.results.lon = feature.geometry.coordinates[1];
+        cl.results.lat = feature.geometry.coordinates[1];
+        cl.results.lon = feature.geometry.coordinates[0];
         cl.results.street = feature.properties;
       } else {
         cl.results.lat = null;

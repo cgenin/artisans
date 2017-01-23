@@ -15,10 +15,12 @@ export default class MiniMap extends Component {
   }
 
   render() {
-    const src = `https://www.google.com/maps/embed/v1/view?key=${this.props.googleApi}&center=${this.props.lat},${this.props.lon}&zoom=18`;
+    const src = `https://maps.googleapis.com/maps/api/staticmap?key=${this.props.googleApi}
+    &center=${this.props.lat},${this.props.lon}
+    &zoom=18&scale=false&size=326x245&maptype=roadmap&format=png&&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C${this.props.lat},${this.props.lon}&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C${this.props.lat},${this.props.lon}`;
 
     return (
-      <iframe
+      <img alt="Carte du lieux"
         width="326"
         height="245"
         frameBorder="0" style={{border: 0}} src={src} allowFullScreen/>

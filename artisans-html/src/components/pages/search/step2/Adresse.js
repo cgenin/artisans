@@ -5,6 +5,8 @@ import CircularProgress from 'material-ui/CircularProgress/CircularProgress';
 import {connect} from 'react-redux';
 
 import {launch} from '../../../../redux/adress/actions'
+import FormAdress from './FormAdress'
+import MiniMap from './MiniMap'
 
 const mapStateToProps = (state) => {
   const {adress} = state;
@@ -19,68 +21,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-const validation = (position) => {
-  const codepostal = position.codepostal && /[0-9]{5}/g.test(position.codepostal);
-  const commune = position.commune && position.commune.length > 2;
-  const valid = codepostal && commune;
-  return {valid, codepostal, commune};
-};
-
-
-class Form extends Component {
-
-  static propTypes = {
-    adress: PropTypes.object.isRequired,
-    onLaunch: PropTypes.func.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {position: {}, validator: {codepostal: true, commune: true}};
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleSubmit(evt) {
-    if (evt) {
-      evt.preventDefault();
-    }
-    const validator = validation(this.state.position);
-    this.setState({validator});
-    if (!validator.valid) {
-      return;
-    }
-
-    this.props.onLaunch(this.state.position);
-  }
-
-  handleChange(key) {
-    return (evt) => {
-      const position = Object.assign({}, this.state.position);
-      position[key] = evt.target.value;
-      this.setState({position});
-    };
-  }
-
-
-  render() {
-    const errorCodepostal = (this.state.validator.codepostal) ? '' : 'Le code postal est requis dans un format correct ex:86000 ';
-    const errorCommune = (this.state.validator.commune) ? '' : 'La commune est requise. ';
-    return (
-      <div className="addresse-form-panel">
-        <TextField value={this.state.position.codepostal} fullWidth={true}
-                   onChange={this.handleChange('codepostal')} floatingLabelText="Code postale"
-                   errorText={errorCodepostal}/>
-        <TextField fullWidth={true} onChange={this.handleChange('commune')} floatingLabelText="Commune"
-                   errorText={errorCommune}/>
-        <TextField fullWidth={true} onChange={this.handleChange('rue')} floatingLabelText="Rue / Lieu dit"
-                   multiLine={true}/>
-        <RaisedButton primary={true} label="Rechercher" style={{marginTop: 10}} onTouchTap={this.handleSubmit}/>
-      </div>
-    );
-  }
-}
-
 const convert = (adress, onLaunch) => {
   switch (adress.step) {
     case adress.CST_START:
@@ -88,15 +28,28 @@ const convert = (adress, onLaunch) => {
         <CircularProgress size={80} thickness={5}/>
       );
     case adress.CST_RESULTS:
+      const {results} = adress;
       return (
-        <div>OK</div>
+        <div>
+          <h2>Résultats</h2>
+          <MiniMap googleApi={adress.key.googleApi} lat={results.lat} lon={results.lon}/>
+          <ul>
+            <li><strong>latitude : </strong>{results.lat}</li>
+            <li><strong>longitude : </strong>{results.lon}</li>
+            <li><strong>Adresse complète : </strong>{results.street.label}</li>
+          </ul>
+          <div className="geolocalisation-results-button-panel">
+            <FlatButton icon={<NavigationArrowBack />}  />
+            <RaisedButton label="Choisir" primary={true} />
+          </div>
+        </div>
       );
     case adress.CST_ERROR:
       return (
-        <div>KO</div>
+        <div></div>
       );
     default:
-      return <Form adress={adress} onLaunch={onLaunch}/>
+      return <FormAdress adress={adress} onLaunch={onLaunch}/>
   }
 };
 

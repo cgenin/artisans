@@ -36,7 +36,7 @@ const convert = (geol, onLaunch) => {
             <strong>latitude : {geol.results.lat} / longitude : {geol.results.lon}</strong>
           </div>
           <div className="geolocalisation-results-button-panel">
-            <RaisedButton label="ré essayé" onClick={onLaunch}/>
+            <FlatButton icon={<NavigationRefresh/>} onClick={onLaunch}/>
             <RaisedButton label="Choisir" primary={true}/>
           </div>
         </Paper>
