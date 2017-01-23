@@ -24,6 +24,12 @@ function results(res) {
   }
 }
 
+export function back() {
+  return {
+    type: DEB
+  };
+}
+
 export function launch(position) {
 
   return (dispatch) => {

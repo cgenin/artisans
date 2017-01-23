@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react';
-import TextField from 'material-ui/TextField/TextField';
+import FlatButton from 'material-ui/FlatButton/FlatButton';
+import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress/CircularProgress';
 import {connect} from 'react-redux';
 
-import {launch} from '../../../../redux/adress/actions'
+import {launch, back} from '../../../../redux/adress/actions'
 import FormAdress from './FormAdress'
 import MiniMap from './MiniMap'
 
@@ -18,10 +19,13 @@ const mapDispatchToProps = (dispatch) => {
     onLaunch: (position) => {
       return dispatch(launch(position));
     },
+    onBack: (position) => {
+      return dispatch(back(position));
+    },
   }
 };
 
-const convert = (adress, onLaunch) => {
+const convert = (adress, onLaunch, onBack) => {
   switch (adress.step) {
     case adress.CST_START:
       return (
@@ -39,8 +43,8 @@ const convert = (adress, onLaunch) => {
             <li><strong>Adresse complète : </strong>{results.street.label}</li>
           </ul>
           <div className="geolocalisation-results-button-panel">
-            <FlatButton icon={<NavigationArrowBack />}  />
-            <RaisedButton label="Choisir" primary={true} />
+            <FlatButton icon={<NavigationArrowBack />} onTouchTap={onBack}/>
+            <RaisedButton label="Choisir" primary={true}/>
           </div>
         </div>
       );
@@ -57,10 +61,11 @@ class Adresse extends Component {
   static propTypes = {
     adress: PropTypes.object.isRequired,
     onLaunch: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired,
   };
 
   render() {
-    const component = convert(this.props.adress, this.props.onLaunch);
+    const component = convert(this.props.adress, this.props.onLaunch, this.props.onBack);
     return (
       <div>
         {component}

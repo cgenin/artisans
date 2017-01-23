@@ -17,6 +17,7 @@ export default function reducer(state = defaultState, action) {
   const cl = Object.assign({}, state);
   switch (action.type) {
     case DEB:
+      cl.step = cl.CST_DEB;
       return cl;
     case START:
       cl.step = cl.CST_START;
