@@ -1,4 +1,6 @@
 import React, {Component, PropTypes} from 'react';
+import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
+import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Paper from 'material-ui/Paper';
@@ -36,7 +38,7 @@ const convert = (geol, onLaunch) => {
             <strong>latitude : {geol.results.lat} / longitude : {geol.results.lon}</strong>
           </div>
           <div className="geolocalisation-results-button-panel">
-            <RaisedButton label="ré essayé" onClick={onLaunch}/>
+            <FlatButton icon={<NavigationRefresh/>} onClick={onLaunch}/>
             <RaisedButton label="Choisir" primary={true}/>
           </div>
         </Paper>
