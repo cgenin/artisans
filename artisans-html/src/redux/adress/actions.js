@@ -34,11 +34,13 @@ export function launch(position) {
         if (res.status >= 400) {
           console.error(res);
           dispatch(error(`Une erreur s'est produite lors de la recherche.`));
-          return;
+          return Promise.reject(true);
         }
-        const json = res.json();
-        dispatch(results(json))
+       return res.json();
+
       }
+    ).then(
+      (json) =>  dispatch(results(json))
     );
   };
 }
