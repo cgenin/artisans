@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>mdpa-parser</module>
+        <module>server</module>
     </modules>
 
     <properties>

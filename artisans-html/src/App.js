@@ -32,13 +32,13 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route path={Routes.index.path} component={Master}>
-            <IndexRoute component={Routes.index.component}/>
-            <Route path={Routes.home.path} component={Routes.home.component}/>
+            <IndexRoute getComponent={Routes.index.component}/>
+            <Route path={Routes.home.path}  getComponent={Routes.home.component}/>
             <Redirect from={Routes.search.path} to={Routes.search.step0.fullpath}/>
-            <Route path={Routes.search.path} component={Routes.search.component}>
-              <Route path={Routes.search.step0.path} component={Routes.search.step0.component}/>
-              <Route path={Routes.search.step1.path} component={Routes.search.step1.component}/>
-              <Route path={Routes.search.step2.path} component={Routes.search.step2.component}/>
+            <Route path={Routes.search.path} getComponent={Routes.search.component}>
+              <Route path={Routes.search.step0.path} getComponent={Routes.search.step0.component}/>
+              <Route path={Routes.search.step1.path} getComponent={Routes.search.step1.component}/>
+              <Route path={Routes.search.step2.path} getComponent={Routes.search.step2.component}/>
             </Route>
             <Route path={Routes.results.path} component={Routes.results.component}/>
           </Route>

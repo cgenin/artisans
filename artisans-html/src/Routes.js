@@ -1,44 +1,72 @@
-import Home from './components/pages/Home';
-import RequiredKnowledge from './components/pages/search';
-import Rechercher from './components/pages/search/step0/Rechercher';
-import SelectionRechercher from './components/pages/search/step1/SelectionRechercher';
-import OuSuisJe from './components/pages/search/step2/OuSuisJe';
-import Results from './components/pages/results';
+const home = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/Home').default)
+  }, 'Home')
+};
 
 
+const search = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/search').default)
+  }, 'Search')
+};
+
+const rechercher = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/search/step0/Rechercher').default)
+  }, 'Rechercher')
+};
+
+const selectionRechercher = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/search/step1/SelectionRechercher').default)
+  }, 'SelectionRechercher')
+};
+
+const ouSuisJe = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/search/step2/OuSuisJe').default)
+  }, 'OuSuisJe')
+};
+const results = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/results').default)
+  }, 'Results')
+};
 export default {
   index: {
     path: '/',
-    component: Home
+    component: home
   },
   home: {
     path: 'home',
-    component: Home,
+    component: home,
     fullpath: '/home'
   },
   search: {
     path: 'search',
-    component: RequiredKnowledge,
+    component: search,
     fullpath: '/search',
     step0: {
       path: 'step0',
-      component: Rechercher,
+      component: rechercher,
       fullpath: '/search/step0',
     },
     step1: {
       path: 'step1/:search',
-      component: SelectionRechercher,
+      component: selectionRechercher,
       fullpath: (s) => `/search/step1/${s}`,
     },
     step2: {
       path: 'step2/:id',
-      component: OuSuisJe,
+      component: ouSuisJe,
       fullpath: (s) => `/search/step2/${s}`,
     }
   },
   results: {
     path: 'results',
-    component: Results, fullpath: '/results'
+    component: results,
+    fullpath: '/results'
   }
 
 }

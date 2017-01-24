@@ -49,3 +49,6 @@ mdpa-parser/datas.json
 mdpa-parser/mdpa-garages.json
 mdpa-parser/target
 
+server/target
+server/.vertx
+
