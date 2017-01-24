@@ -1,4 +1,4 @@
-package fr.genin.christophe.artisans.mdpa.parser;
+package fr.genin.christophe.artisans.mdpa.parser.parser;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -8,8 +8,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -19,9 +21,10 @@ import java.util.stream.Stream;
  */
 public class Parser {
 
+    private static Pattern pattern_Contact = Pattern.compile("Tel: ([0-9]{10}) Fax: ([0-9]{10})");
+
     private static final Logger logger = LoggerFactory.getLogger(Parser.class);
     public final List<JsonObject> list;
-
 
     private Parser(List<JsonObject> list) {
         this.list = list;
@@ -29,6 +32,21 @@ public class Parser {
 
     public JsonArray json() {
         return new JsonArray(list);
+    }
+
+    static JsonObject parseContact(String contact) {
+
+        if (contact != null && !contact.isEmpty()) {
+            final Matcher matcher = pattern_Contact.matcher(contact);
+            if (matcher.find()) {
+                final String tel = matcher.group(1);
+                final String fax = matcher.group(2);
+                return new JsonObject().put("tel", tel).put("fax", fax);
+            }
+        }
+
+
+        return new JsonObject();
     }
 
     public static class Builder {
@@ -44,6 +62,7 @@ public class Parser {
             this.deps = deps;
             return this;
         }
+
 
         public Stream<JsonObject> map(String dep) {
             try {
@@ -68,9 +87,10 @@ public class Parser {
                                 }
                         )
                         .map(l -> new JsonObject()
+                                .put("id", UUID.randomUUID().toString())
                                 .put("name", elements.get(l.get(0)).text())
                                 .put("adress", elements.get(l.get(1)).text())
-                                .put("contact", elements.get(l.get(2)).text()));
+                                .put("contact", parseContact(elements.get(l.get(2)).text())));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

@@ -4,7 +4,7 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/workspace.xml
+.idea
 .idea/tasks.xml
 
 # Sensitive or high-churn files:
@@ -46,5 +46,6 @@ fabric.properties
 *.iml
 
 mdpa-parser/datas.json
+mdpa-parser/mdpa-garages.json
 mdpa-parser/target
 
