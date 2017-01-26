@@ -22,6 +22,11 @@
             <artifactId>vertx-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>biz.paluch.redis</groupId>
+            <artifactId>lettuce</artifactId>
+            <version>4.3.0.Final</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -42,9 +47,28 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
-
                 </configuration>
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>exec-maven-plugin</artifactId>-->
+                <!--<version>1.5.0</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>run</id>-->
+                        <!--<phase>prepare-package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>java</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<mainClass>fr.genin.christophe.artisans.mdpa.parser.Main</mainClass>-->
+                            <!--<arguments>-->
+                                <!--<argument>${basedir}/../server/src/main/resources/mdpa-garages.json</argument>-->
+                            <!--</arguments>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>

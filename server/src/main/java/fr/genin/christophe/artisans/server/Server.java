@@ -15,7 +15,7 @@ public class Server extends AbstractVerticle {
     public void start() throws Exception {
         logger.info("launching server ...");
         vertx.deployVerticle(new Http());
-
+        vertx.deployVerticle(new Artisans());
 
     }
 

@@ -24,11 +24,21 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>fr.genin.christophe.artisans</groupId>
+                <artifactId>mdpa-parser</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>io.vertx</groupId>
                 <artifactId>vertx-core</artifactId>
                 <version>${vertx.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>18.0</version>
+            </dependency>
             <dependency>
                 <groupId>io.vertx</groupId>
                 <artifactId>vertx-web</artifactId>
@@ -41,8 +51,13 @@
             </dependency>
             <dependency>
                 <groupId>io.vertx</groupId>
+                <artifactId>vertx-redis-client</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.vertx</groupId>
                 <artifactId>vertx-web</artifactId>
-                <version>3.3.3</version>
+                <version>${vertx.version}</version>
                 <classifier>client</classifier>
                 <type>js</type>
             </dependency>
@@ -53,38 +68,13 @@
             </dependency>
 
 
-            <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-sockjs-service-proxy</artifactId>
-                <version>${vertx.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-service-proxy</artifactId>
-                <version>${vertx.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-codegen</artifactId>
-                <version>${vertx.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-project</artifactId>
                 <version>2.2.1</version>
             </dependency>
-            <dependency>
-                <groupId>org.cache2k</groupId>
-                <artifactId>cache2k-api</artifactId>
-                <version>${cache2k-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.cache2k</groupId>
-                <artifactId>cache2k-all</artifactId>
-                <version>${cache2k-version}</version>
 
-            </dependency>
             <dependency>
                 <!-- jsoup HTML parser library @ http://jsoup.org/ -->
                 <groupId>org.jsoup</groupId>

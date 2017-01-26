@@ -30,9 +30,6 @@ public class Parser {
         this.list = list;
     }
 
-    public JsonArray json() {
-        return new JsonArray(list);
-    }
 
     static JsonObject parseContact(String contact) {
 
@@ -88,6 +85,7 @@ public class Parser {
                         )
                         .map(l -> new JsonObject()
                                 .put("id", UUID.randomUUID().toString())
+                                .put("dep", dep)
                                 .put("name", elements.get(l.get(0)).text())
                                 .put("adress", elements.get(l.get(1)).text())
                                 .put("contact", parseContact(elements.get(l.get(2)).text())));
