@@ -1,5 +1,6 @@
 package fr.genin.christophe.artisans.server;
 
+import fr.genin.christophe.artisans.server.number.Doubles;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServer;
@@ -11,6 +12,7 @@ import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 
+import javax.swing.text.html.Option;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +39,7 @@ public class Http extends AbstractVerticle {
         Router artisanAPI = Router.router(vertx);
         Router artisanTypeAPI = Router.router(vertx);
         artisanTypeService(artisanTypeAPI);
+        artisanService(artisanAPI);
         artisanAPI.mountSubRouter("/type", artisanTypeAPI);
         restAPI.mountSubRouter("/artisan", artisanAPI);
         router.mountSubRouter("/api", restAPI);
@@ -49,6 +52,28 @@ public class Http extends AbstractVerticle {
 
         httpServer.requestHandler(router::accept).listen(port);
         logger.info("Http server launched !");
+    }
+
+
+    private void artisanService(Router artisanAPI) {
+        artisanAPI.get("/near").handler(rc -> {
+            final Double lat = Doubles.toDouble(rc.request().params().get("lat"));
+            final Double lon = Doubles.toDouble(rc.request().params().get("lon"));
+
+            if (lat.equals(0.0) || lon.equals(0.0)) {
+                rc.response().setStatusCode(400).end();
+                return;
+            }
+            final JsonObject params = Optional.ofNullable(rc.request().params().get("dept"))
+                    .map(d -> new JsonObject().put("dept", d))
+                    .orElse(new JsonObject());
+            vertx.eventBus().<JsonArray>send(Artisans.ARTISANS_NEAR, params.put("lat", lat).put("lon", lon),
+                    msg -> {
+
+                    }
+            );
+
+        });
     }
 
     private void getAllTypes(Consumer<JsonArray> consumer) {

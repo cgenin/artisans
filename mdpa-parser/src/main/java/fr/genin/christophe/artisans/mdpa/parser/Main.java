@@ -2,6 +2,7 @@ package fr.genin.christophe.artisans.mdpa.parser;
 
 import fr.genin.christophe.artisans.mdpa.parser.parser.Parser;
 import fr.genin.christophe.artisans.mdpa.parser.redis.RedisContainer;
+import fr.genin.christophe.artisans.mdpa.parser.redis.RedisCst;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
@@ -35,7 +36,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         final Main main = new Main();
-        RedisContainer.builder("redis://localhost:6379/0").sync(
+        RedisContainer.builder(RedisCst.URL).sync(
                 commands -> {
                     final List<String> departements = Departements.get();
                     Arrays.stream(Voiture.values()).forEach(
@@ -74,14 +75,6 @@ public class Main {
                 }
         );
 
-
-//        logger.info("write the file ....");
-
-//        final Path path = Paths.get(file);
-//        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
-//            writer.write(new JsonArray(garages).encode());
-//            writer.flush();
-//        }
         logger.info("end.");
 
     }
