@@ -12,7 +12,6 @@ import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 
-import javax.swing.text.html.Option;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -59,17 +58,25 @@ public class Http extends AbstractVerticle {
         artisanAPI.get("/near").handler(rc -> {
             final Double lat = Doubles.toDouble(rc.request().params().get("lat"));
             final Double lon = Doubles.toDouble(rc.request().params().get("lon"));
+            final String type = Optional.ofNullable(rc.request().params().get("type")).orElse("");
+            final String dept = Optional.ofNullable(rc.request().params().get("dept")).orElse("");
 
-            if (lat.equals(0.0) || lon.equals(0.0)) {
+            if (lat.equals(0.0) || lon.equals(0.0) || type.isEmpty() || dept.isEmpty()) {
                 rc.response().setStatusCode(400).end();
                 return;
             }
-            final JsonObject params = Optional.ofNullable(rc.request().params().get("dept"))
-                    .map(d -> new JsonObject().put("dept", d))
-                    .orElse(new JsonObject());
-            vertx.eventBus().<JsonArray>send(Artisans.ARTISANS_NEAR, params.put("lat", lat).put("lon", lon),
+            final JsonObject params = new JsonObject().put("dept", dept).put("lat", lat).put("lon", lon).put("type", type);
+            vertx.eventBus().<JsonObject>send(Artisans.ARTISANS_NEAR, params,
                     msg -> {
-
+                        if (msg.failed()) {
+                            rc.response().setStatusCode(500).end();
+                            return;
+                        }
+                        final String encode = msg.result().body().encode();
+                        rc.response()
+                                .putHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                                .putHeader(HttpHeaders.ETAG, "" + encode.hashCode())
+                                .end(encode);
                     }
             );
 
