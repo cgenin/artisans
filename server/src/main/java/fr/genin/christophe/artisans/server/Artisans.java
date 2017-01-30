@@ -1,7 +1,7 @@
 package fr.genin.christophe.artisans.server;
 
 import fr.genin.christophe.artisans.server.commands.SearchCommands;
-import fr.genin.christophe.artisans.server.commands.TypeAllcommand;
+import fr.genin.christophe.artisans.server.commands.AllTypescommand;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -9,9 +9,6 @@ import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.redis.RedisClient;
 import io.vertx.redis.RedisOptions;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Artisans search.
@@ -33,7 +30,7 @@ public class Artisans extends AbstractVerticle {
         logger.info("Redis client connected");
 
         vertx.eventBus().consumer(TYPE_ARTISANS, msg ->
-                new TypeAllcommand(redis).execute(
+                new AllTypescommand(redis).execute(
                         err -> {
                             logger.error("TYPE_ARTISANS", err);
                             msg.reply(new JsonArray());
@@ -51,7 +48,7 @@ public class Artisans extends AbstractVerticle {
             new SearchCommands(redis, lat, lon, dept, type)
                     .execute(
                             e -> {
-                                logger.error("Error in retreiving key");
+                                logger.error("Error in retreiving key",e);
                                 msg.fail(500, "error");
                             },
                             (results) -> msg.reply(new JsonObject()

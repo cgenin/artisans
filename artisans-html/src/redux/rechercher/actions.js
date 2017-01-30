@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import Api from '../../services/api';
 export const STEP0 = 'rechercher:step0';
 export const STEP1 = 'rechercher:step1';
 export const STEP2 = 'rechercher:step2';
@@ -16,10 +16,7 @@ export function step0() {
 
 export function step1(search) {
   return dispatch => {
-    return fetch('/artisans-type.json')
-      .then(
-        res => res.json()
-      )
+    return Api.get('/api/artisan/type')
       .then(artisans => dispatch({type: STEP1, search, artisans}));
   };
 }

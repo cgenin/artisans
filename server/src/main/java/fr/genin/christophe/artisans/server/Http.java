@@ -3,6 +3,7 @@ package fr.genin.christophe.artisans.server;
 import fr.genin.christophe.artisans.server.number.Doubles;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpHeaders;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonArray;
@@ -10,6 +11,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 
 import java.util.Collections;
@@ -36,6 +38,11 @@ public class Http extends AbstractVerticle {
 
         Router restAPI = Router.router(vertx);
         Router artisanAPI = Router.router(vertx);
+        artisanAPI.route().handler(CorsHandler.create("*")
+                .allowedMethod(HttpMethod.GET)
+//                .allowedMethod(HttpMethod.POST)
+                .allowedMethod(HttpMethod.OPTIONS)
+                .allowedHeader("Content-Type"));
         Router artisanTypeAPI = Router.router(vertx);
         artisanTypeService(artisanTypeAPI);
         artisanService(artisanAPI);

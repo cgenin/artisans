@@ -16,12 +16,12 @@ import java.util.List;
 /**
  * get all type of artisans
  */
-public class TypeAllcommand {
+public class AllTypescommand {
 
 
     private final RedisClient redis;
 
-    public TypeAllcommand(RedisClient redis) {
+    public AllTypescommand(RedisClient redis) {
         this.redis = redis;
     }
 
