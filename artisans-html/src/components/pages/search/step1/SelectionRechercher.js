@@ -7,16 +7,20 @@ import  CardText from 'material-ui/Card/CardText';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import List  from 'material-ui/List/List';
 import  ListItem from 'material-ui/List/ListItem';
+import  Divider from 'material-ui/Divider/Divider';
 import ContentSend from 'material-ui/svg-icons/content/send';
 
 import HelpModal from '../../../help-modal/HelpModal'
 import rechercher from '../rechercher.md';
 import Routes from '../../../../Routes';
+import ThemeApp from '../../../ThemeApp';
 import {step0, step1, step2} from '../../../../redux/rechercher/actions';
 
-const mapStateToProps = (state) => {
-  const {search, artisans} = state.rechercher;
-  return {search, artisans};
+
+const mapStateToProps = (state, ownProps) => {
+  const {search, artisans, match, length} = state.rechercher;
+
+  return {search, artisans, match, length};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -34,7 +38,9 @@ const mapDispatchToProps = (dispatch) => {
 class SelectionRechercher extends Component {
   static propTypes = {
     search: PropTypes.string,
-    artisans: PropTypes.array,
+    artisans: PropTypes.array.isRequired,
+    match: PropTypes.array.isRequired,
+    length: PropTypes.number.isRequired,
   };
 
   static contextTypes = {
@@ -44,6 +50,7 @@ class SelectionRechercher extends Component {
   constructor(props) {
     super(props);
     this.onBack = this.onBack.bind(this);
+    this.state={other:false};
   }
 
 
@@ -66,7 +73,7 @@ class SelectionRechercher extends Component {
       if (evt) {
         evt.preventDefault();
       }
-      this.props.onValidate(artisan.sub)
+      this.props.onValidate(artisan.key)
         .then(
           () => this.context.router.push(Routes.search.step2.fullpath(artisan.sub))
         );
@@ -75,15 +82,22 @@ class SelectionRechercher extends Component {
 
   render() {
     const title = `Recherche de : '${this.props.search}'`;
+    const res = this.props.match.map((a, i) =>
+      <ListItem key={i} primaryText={ `Mot clé : ${a.label}` } leftIcon={
+        <ContentSend  style={{color:ThemeApp.selectionrechercher.color}} />}
+                style={ThemeApp.selectionrechercher}  onTouchTap={this.onValidate(a)} secondaryText={a.name}/>
+    );
     const arts = this.props.artisans.map((a, i) =>
-      <ListItem key={i} primaryText={a.label} leftIcon={<ContentSend />}
-                onTouchTap={this.onValidate(a)} secondaryText={a.group}/>
+      <ListItem key={i} primaryText={ `Mot clé : ${a.label}` } leftIcon={<ContentSend />}
+                onTouchTap={this.onValidate(a)} secondaryText={a.name}/>
     );
     return (
       <div className="speech-bubble-container">
         <Card initiallyExpanded={true} style={{width: 328}}>
-          <CardHeader title={title}/>
-          <CardText>
+          <CardHeader title={title} subtitle={`${this.props.length} résultat(s)`}/>
+          <CardText className="selection-rechercher-container">
+            {res}
+            <Divider/>
             <List>
               {arts}
             </List>

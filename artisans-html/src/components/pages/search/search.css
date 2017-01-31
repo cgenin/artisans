@@ -13,6 +13,11 @@
     align-items: center;
 }
 
+.selection-rechercher-container{
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
 section {
     min-height: 50vh;
     display: flex;
