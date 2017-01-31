@@ -5,10 +5,13 @@ import  CardActions  from 'material-ui/Card/CardActions';
 import  CardHeader  from 'material-ui/Card/CardHeader';
 import  CardText from 'material-ui/Card/CardText';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
+import FlatButton from 'material-ui/FlatButton/FlatButton';
 import List  from 'material-ui/List/List';
 import  ListItem from 'material-ui/List/ListItem';
 import  Divider from 'material-ui/Divider/Divider';
 import ContentSend from 'material-ui/svg-icons/content/send';
+import ContentRemove from 'material-ui/svg-icons/content/remove';
+import NavigationMoreHoriz from 'material-ui/svg-icons/navigation/more-horiz';
 
 import HelpModal from '../../../help-modal/HelpModal'
 import rechercher from '../rechercher.md';
@@ -50,7 +53,8 @@ class SelectionRechercher extends Component {
   constructor(props) {
     super(props);
     this.onBack = this.onBack.bind(this);
-    this.state={other:false};
+    this.onMore = this.onMore.bind(this);
+    this.state = {other: false};
   }
 
 
@@ -68,6 +72,12 @@ class SelectionRechercher extends Component {
     );
   }
 
+  onMore() {
+    const other = !this.state.other;
+    this.setState({other});
+  }
+
+
   onValidate(artisan) {
     return (evt) => {
       if (evt) {
@@ -75,7 +85,7 @@ class SelectionRechercher extends Component {
       }
       this.props.onValidate(artisan.key)
         .then(
-          () => this.context.router.push(Routes.search.step2.fullpath(artisan.sub))
+          () => this.context.router.push(Routes.search.step2.fullpath(artisan.key))
         );
     }
   }
@@ -83,24 +93,37 @@ class SelectionRechercher extends Component {
   render() {
     const title = `Recherche de : '${this.props.search}'`;
     const res = this.props.match.map((a, i) =>
-      <ListItem key={i} primaryText={ `Mot clé : ${a.label}` } leftIcon={
-        <ContentSend  style={{color:ThemeApp.selectionrechercher.color}} />}
-                style={ThemeApp.selectionrechercher}  onTouchTap={this.onValidate(a)} secondaryText={a.name}/>
-    );
-    const arts = this.props.artisans.map((a, i) =>
-      <ListItem key={i} primaryText={ `Mot clé : ${a.label}` } leftIcon={<ContentSend />}
+      <ListItem key={i} primaryText={ `Mot clé : ${a.label}` } leftIcon={  <ContentSend  />}
                 onTouchTap={this.onValidate(a)} secondaryText={a.name}/>
     );
+
+    const all = (this.state.other) ?
+      (
+        <div style={{width: '100%', marginTop: '5px'}}>
+          <FlatButton style={{margin: 'auto'}} icon={<ContentRemove/>} label="Masquer"
+                      secondary={true} onClick={this.onMore}/>
+          <List>
+            {this.props.artisans.map((a, i) =>
+              <ListItem key={i} primaryText={ `Mot clé : ${a.label}` } leftIcon={<ContentSend />}
+                        onTouchTap={this.onValidate(a)} secondaryText={a.name}/>
+            )}
+          </List>
+          <FlatButton style={{margin: 'auto'}} icon={<ContentRemove/>} label="Masquer"
+                      secondary={true} onClick={this.onMore}/>
+        </div>
+      ) :
+      (<div style={{width: '100%', marginTop: '5px'}}>
+        <FlatButton style={{margin: 'auto'}} icon={<NavigationMoreHoriz/>} label="Plus de résultats"
+                    secondary={true} onClick={this.onMore}/>
+      </div>);
     return (
       <div className="speech-bubble-container">
         <Card initiallyExpanded={true} style={{width: 328}}>
           <CardHeader title={title} subtitle={`${this.props.length} résultat(s)`}/>
           <CardText className="selection-rechercher-container">
-            {res}
+            <List>{res}</List>
             <Divider/>
-            <List>
-              {arts}
-            </List>
+            {all}
           </CardText>
           <CardActions className="rechercher-card-actions">
             <HelpModal text={rechercher}/>

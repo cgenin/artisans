@@ -14,8 +14,8 @@
 }
 
 .selection-rechercher-container{
-    max-height: 55vh;
-    overflow-y: auto;
+    /*max-height: 55vh;*/
+    /*overflow-y: auto;*/
 }
 
 section {

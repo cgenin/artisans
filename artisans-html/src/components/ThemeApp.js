@@ -1,4 +1,4 @@
-import {blue900, green500} from 'material-ui/styles/colors';
+import {blue900, green500, white} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const muiTheme = getMuiTheme({
@@ -11,7 +11,8 @@ const muiTheme = getMuiTheme({
 export default {
   muiTheme,
   selectionrechercher: {
-    color: green500,
+    backgroundColor: green500,
+    color: white,
     fontSize: 'bold',
     icons: {
       color: green500,
