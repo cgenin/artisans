@@ -1,8 +1,9 @@
 import {DEB, START, RESULTS, ERROR} from './actions';
+import Local from '../../services/localforage';
 
 const key = require('../keys.json');
 
-const defaultState = {
+const defaultState = Local.initialize('adress', {
   CST_START: 1,
   CST_DEB: 0,
   CST_RESULTS: 2,
@@ -11,18 +12,18 @@ const defaultState = {
   position: {},
   results: {},
   msg: {}, key
-};
+});
 
 export default function reducer(state = defaultState, action) {
   const cl = Object.assign({}, state);
   switch (action.type) {
     case DEB:
       cl.step = cl.CST_DEB;
-      return cl;
+      return Local.setState('adress', cl);
     case START:
       cl.step = cl.CST_START;
       cl.position = action.position;
-      return cl;
+      return Local.setState('adress', cl);
     case RESULTS:
       cl.step = cl.CST_RESULTS;
       if (action.res.features.length > 0) {
@@ -35,12 +36,14 @@ export default function reducer(state = defaultState, action) {
         cl.results.lon = null;
       }
       cl.results.ws = action.res;
-      return cl;
+
+      return Local.setState('adress', cl);
     case ERROR:
       cl.step = cl.CST_ERROR;
       const {msg} = action;
       cl.msg = msg;
-      return cl;
+
+      return Local.setState('adress', cl);
     default:
       return state;
   }

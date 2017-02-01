@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-const convert = (adress, onLaunch, onBack) => {
+const convert = (adress, onLaunch, onBack, onSelect) => {
   switch (adress.step) {
     case adress.CST_START:
       return (
@@ -44,7 +44,7 @@ const convert = (adress, onLaunch, onBack) => {
           </ul>
           <div className="geolocalisation-results-button-panel">
             <FlatButton icon={<NavigationArrowBack />} onTouchTap={onBack}/>
-            <RaisedButton label="Choisir" primary={true}/>
+            <RaisedButton label="Choisir" primary={true} onClick={() => onSelect(results.lat, results.lon)}/>
           </div>
         </div>
       );
@@ -62,10 +62,11 @@ class Adresse extends Component {
     adress: PropTypes.object.isRequired,
     onLaunch: PropTypes.func.isRequired,
     onBack: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
   };
 
   render() {
-    const component = convert(this.props.adress, this.props.onLaunch, this.props.onBack);
+    const component = convert(this.props.adress, this.props.onLaunch, this.props.onBack, this.props.onSelect);
     return (
       <div>
         {component}

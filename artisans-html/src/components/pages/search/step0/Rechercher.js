@@ -1,13 +1,12 @@
 import React, {Component, PropTypes} from 'react';
-import Card  from 'material-ui/Card/Card';
 import  CardActions  from 'material-ui/Card/CardActions';
-import  CardHeader  from 'material-ui/Card/CardHeader';
 import  CardMedia from 'material-ui/Card/CardMedia';
 import  CardText from 'material-ui/Card/CardText';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import TextField from 'material-ui/TextField/TextField';
 import {connect} from 'react-redux';
 
+import SearchLayout from '../SearchLayout'
 import HelpModal from '../../../help-modal/HelpModal'
 import search from '../rechercher.md';
 import rechercherImg from './rechercher-bubble.svg';
@@ -65,9 +64,7 @@ class Rechercher extends Component {
 
   render() {
     return (
-      <div className="speech-bubble-container">
-        <Card initiallyExpanded={true} style={{width: 328}}>
-          <CardHeader title="Rechercher"/>
+      <SearchLayout title="Rechercher">
           <CardMedia>
             <img alt="Que recherchez vous ?" src={rechercherImg} width={264} height={272}/>
           </CardMedia>
@@ -81,9 +78,7 @@ class Rechercher extends Component {
             <RaisedButton primary={true} label="Suivant" onClick={this.onSubmit}
                           disabled={this.state.search.length === 0 }/>
           </CardActions>
-        </Card>
-      </div>
-
+      </SearchLayout>
     );
   }
 }

@@ -9,7 +9,7 @@
 .geolocalisation-results-button-panel {
     display: flex;
     justify-content: space-around;
-    margin: 5px;
+    margin: 10px;
 }
 
 .addresse-form-panel {

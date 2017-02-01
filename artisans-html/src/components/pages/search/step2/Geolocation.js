@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-const convert = (geol, onLaunch) => {
+const convert = (geol, onLaunch, onSelect) => {
   switch (geol.step) {
     case geol.CST_START:
       return (
@@ -39,7 +39,7 @@ const convert = (geol, onLaunch) => {
           </div>
           <div className="geolocalisation-results-button-panel">
             <FlatButton icon={<NavigationRefresh/>} onClick={onLaunch}/>
-            <RaisedButton label="Choisir" primary={true}/>
+            <RaisedButton label="Choisir" primary={true} onClick={() => onSelect(geol.results.lat, geol.results.lon)}/>
           </div>
         </Paper>
       );
@@ -75,6 +75,7 @@ class Geolocation extends Component {
   static propTypes = {
     geolocation: PropTypes.object.isRequired,
     onLaunch: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -83,7 +84,7 @@ class Geolocation extends Component {
   }
 
   render() {
-    const comp = convert(this.props.geolocation, this.props.onLaunch);
+    const comp = convert(this.props.geolocation, this.props.onLaunch, this.props.onSelect);
     return (
       <div>
         {comp}

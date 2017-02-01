@@ -1,12 +1,13 @@
 import {STEP0, STEP1, STEP2, STEP3} from './actions';
+import Local from '../../services/localforage';
 
-const defaultState = {
+const defaultState = Local.initialize('rechercher', {
   step: 0,
   artisans: [],
   search: '',
   length: 0,
   match: []
-};
+});
 
 const flatten = list => list.reduce(
   (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
@@ -35,11 +36,13 @@ export default function reducer(state = defaultState, action) {
       const upper = action.search.toUpperCase();
       changeStep2.match = changeStep2.artisans.filter(a => upper.indexOf(a.label) !== -1 || a.label.indexOf(upper) !== -1);
       changeStep2.length = changeStep2.match.length;
-      return changeStep2;
+
+      return Local.setState('rechercher', changeStep2);
     case STEP2:
-      return changeStep(state, 2);
+      return Local.setState('rechercher', changeStep(state, 2));
+
     case STEP3:
-      return changeStep(state, 3);
+      return Local.setState('rechercher', changeStep(state, 3));
     default :
       return state;
   }

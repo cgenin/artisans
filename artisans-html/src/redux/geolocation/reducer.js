@@ -1,8 +1,8 @@
 import {DEB, START, RESULTS, ERROR} from './actions';
-
+import Local from '../../services/localforage';
 const key = require('../keys.json');
 
-const defaultState = {
+const defaultState = Local.initialize('geolocation', {
   CST_START: 1,
   CST_DEB: 0,
   CST_RESULTS: 2,
@@ -10,7 +10,7 @@ const defaultState = {
   step: 0,
   results: {},
   msg: {}, key
-};
+});
 
 export default function reducer(state = defaultState, action) {
   const cl = Object.assign({}, state);

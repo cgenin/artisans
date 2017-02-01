@@ -28,11 +28,21 @@ const ouSuisJe = (location, callback) => {
     callback(null, require('./components/pages/search/step2/OuSuisJe').default)
   }, 'OuSuisJe')
 };
+
+
+const recapitulatif = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/search/step3/Recapitulatif').default)
+  }, 'Recapitulatif')
+};
+
 const results = (location, callback) => {
   require.ensure([], require => {
     callback(null, require('./components/pages/results').default)
   }, 'Results')
 };
+
+
 export default {
   index: {
     path: '/',
@@ -61,7 +71,13 @@ export default {
       path: 'step2/:id',
       component: ouSuisJe,
       fullpath: (s) => `/search/step2/${s}`,
+    },
+    step3: {
+      path: 'step3/:id/:lat/:lon',
+      component: recapitulatif,
+      fullpath: (s, lat, lon) => `/search/step3/${s}/${lat}/${lon}`,
     }
+
   },
   results: {
     path: 'results',

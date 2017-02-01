@@ -39,6 +39,7 @@ class App extends Component {
               <Route path={Routes.search.step0.path} getComponent={Routes.search.step0.component}/>
               <Route path={Routes.search.step1.path} getComponent={Routes.search.step1.component}/>
               <Route path={Routes.search.step2.path} getComponent={Routes.search.step2.component}/>
+              <Route path={Routes.search.step3.path} getComponent={Routes.search.step3.component}/>
             </Route>
             <Route path={Routes.results.path} component={Routes.results.component}/>
           </Route>

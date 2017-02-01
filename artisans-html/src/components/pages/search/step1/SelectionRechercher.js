@@ -1,8 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import Card  from 'material-ui/Card/Card';
 import  CardActions  from 'material-ui/Card/CardActions';
-import  CardHeader  from 'material-ui/Card/CardHeader';
 import  CardText from 'material-ui/Card/CardText';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
@@ -13,7 +11,8 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import NavigationMoreHoriz from 'material-ui/svg-icons/navigation/more-horiz';
 
-import HelpModal from '../../../help-modal/HelpModal'
+import SearchLayout from '../SearchLayout';
+import HelpModal from '../../../help-modal/HelpModal';
 import rechercher from '../rechercher.md';
 import Routes from '../../../../Routes';
 import ThemeApp from '../../../ThemeApp';
@@ -117,9 +116,7 @@ class SelectionRechercher extends Component {
                     secondary={true} onClick={this.onMore}/>
       </div>);
     return (
-      <div className="speech-bubble-container">
-        <Card initiallyExpanded={true} style={{width: 328}}>
-          <CardHeader title={title} subtitle={`${this.props.length} résultat(s)`}/>
+      <SearchLayout title={title} subtitle={`${this.props.length} résultat(s)`}>
           <CardText className="selection-rechercher-container">
             <List>{res}</List>
             <Divider/>
@@ -129,9 +126,7 @@ class SelectionRechercher extends Component {
             <HelpModal text={rechercher}/>
             <RaisedButton label="Précédent" onClick={this.onBack}/>
           </CardActions>
-        </Card>
-      </div>
-
+        </SearchLayout>
     );
   }
 }

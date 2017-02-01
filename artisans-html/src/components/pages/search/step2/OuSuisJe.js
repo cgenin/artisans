@@ -1,7 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import Card  from 'material-ui/Card/Card';
 import  CardActions  from 'material-ui/Card/CardActions';
-import  CardHeader  from 'material-ui/Card/CardHeader';
 import  CardMedia from 'material-ui/Card/CardMedia';
 import  CardText from 'material-ui/Card/CardText';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
@@ -10,8 +8,8 @@ import   Tab from 'material-ui/Tabs/Tab';
 import {connect} from 'react-redux';
 
 
-
-import HelpModal from '../../../help-modal/HelpModal'
+import SearchLayout from '../SearchLayout';
+import HelpModal from '../../../help-modal/HelpModal';
 import search from '../rechercher.md';
 import rechercherImg from './ousuisje-bubble.svg';
 import Routes from '../../../../Routes';
@@ -52,6 +50,7 @@ class Rechercher extends Component {
     };
 
     this.onBack = this.onBack.bind(this);
+    this.onGoStep3 = this.onGoStep3.bind(this);
   }
 
   componentDidMount() {
@@ -68,25 +67,29 @@ class Rechercher extends Component {
     );
   }
 
+  onGoStep3(lat, lon) {
+    this.props.onValidate().then(
+      () => this.context.router.push(Routes.search.step3.fullpath(this.props.search, lat, lon))
+    );
+  }
+
 
   render() {
     return (
-      <div className="speech-bubble-container">
-        <Card initiallyExpanded={true} style={{width: 328}}>
-          <CardHeader title="Se Situer"/>
+      <SearchLayout  title="Se Situer">
           <CardMedia>
             <img alt="Ou suis je ?" src={rechercherImg} width={264} height={272}/>
           </CardMedia>
           <CardText>
             <Tabs >
-              <Tab style={{backgroundColor:ThemeApp.drawer.header.color}}  label="GPS">
+              <Tab style={{backgroundColor: ThemeApp.drawer.header.color}} label="GPS">
                 <div className="tab-signature">
-                  <Geolocation/>
+                  <Geolocation onSelect={this.onGoStep3}/>
                 </div>
               </Tab>
-              <Tab style={{backgroundColor:ThemeApp.drawer.header.color}} label="Adresse">
+              <Tab style={{backgroundColor: ThemeApp.drawer.header.color}} label="Adresse">
                 <div className="tab-signature">
-                  <Adresse/>
+                  <Adresse onSelect={this.onGoStep3}/>
                 </div>
               </Tab>
             </Tabs>
@@ -95,9 +98,7 @@ class Rechercher extends Component {
             <HelpModal text={search}/>
             <RaisedButton label="Précédent" onClick={this.onBack}/>
           </CardActions>
-        </Card>
-      </div>
-
+        </SearchLayout>
     );
   }
 }
