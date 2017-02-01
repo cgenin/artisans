@@ -18,6 +18,28 @@
     /*overflow-y: auto;*/
 }
 
+.recap-results-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+.recap-results-item {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.recap-results-item.center {
+    justify-content: center;
+}
+
+.recap-results-item.margin-top {
+    margin-top: 15px;
+}
+
 section {
     min-height: 50vh;
     display: flex;

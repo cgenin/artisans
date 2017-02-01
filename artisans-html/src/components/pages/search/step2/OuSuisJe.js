@@ -20,24 +20,25 @@ import Geolocation from './Geolocation';
 import Adresse from './Adresse';
 
 const mapStateToProps = (state) => {
-  const {artisans, search} = state.rechercher;
-  return {artisans, search};
+  const { selected, search} = state.rechercher;
+  return { akey:selected.key, search};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onValidate: (artisans) => {
-      return dispatch(step3(artisans));
+    onValidate: (key) => {
+      return dispatch(step3(key));
     },
-    onBack: (artisans) => {
-      return dispatch(step2(artisans));
+    onBack: (search) => {
+      return dispatch(step2(search));
     }
   }
 };
 
 class Rechercher extends Component {
   static propTypes = {
-    search: PropTypes.string
+    key: PropTypes.string,
+    search: PropTypes.string,
   };
   static contextTypes = {
     router: PropTypes.object.isRequired,
@@ -45,31 +46,26 @@ class Rechercher extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      search: ''
-    };
-
     this.onBack = this.onBack.bind(this);
     this.onGoStep3 = this.onGoStep3.bind(this);
   }
 
-  componentDidMount() {
-    const search = this.props.search || '';
-    this.setState({search})
-  }
+
 
   onBack(evt) {
     if (evt) {
       evt.preventDefault();
     }
-    this.props.onBack().then(
-      () => this.context.router.push(Routes.search.step1.fullpath(this.props.search))
+    const search = this.props.search;
+    this.props.onBack(search).then(
+      () => this.context.router.push(Routes.search.step1.fullpath(search))
     );
   }
 
   onGoStep3(lat, lon) {
-    this.props.onValidate().then(
-      () => this.context.router.push(Routes.search.step3.fullpath(this.props.search, lat, lon))
+    const key = this.props.akey;
+    this.props.onValidate(key).then(
+      () => this.context.router.push(Routes.search.step3.fullpath(key, lat, lon))
     );
   }
 

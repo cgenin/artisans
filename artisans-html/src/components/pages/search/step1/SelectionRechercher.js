@@ -31,8 +31,8 @@ const mapDispatchToProps = (dispatch) => {
     step1: (search) => {
       return dispatch(step1(search))
     },
-    onValidate: (artisanType) => {
-      return dispatch(step2(artisanType));
+    onValidate: (artisan) => {
+      return dispatch(step2(artisan));
     }
   }
 };
@@ -82,7 +82,7 @@ class SelectionRechercher extends Component {
       if (evt) {
         evt.preventDefault();
       }
-      this.props.onValidate(artisan.key)
+      this.props.onValidate(artisan)
         .then(
           () => this.context.router.push(Routes.search.step2.fullpath(artisan.key))
         );

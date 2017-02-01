@@ -21,9 +21,9 @@ export function step1(search) {
   };
 }
 
-export function step2() {
+export function step2(selected) {
   return dispatch => {
-    dispatch({type: STEP2});
+    dispatch({type: STEP2, selected});
     return Promise.resolve(true);
   };
 }

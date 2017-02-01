@@ -6,6 +6,7 @@ const defaultState = Local.initialize('rechercher', {
   artisans: [],
   search: '',
   length: 0,
+  selected: {},
   match: []
 });
 
@@ -39,8 +40,9 @@ export default function reducer(state = defaultState, action) {
 
       return Local.setState('rechercher', changeStep2);
     case STEP2:
-      return Local.setState('rechercher', changeStep(state, 2));
-
+      let value = changeStep(state, 2);
+      value.selected = action.selected;
+      return Local.setState('rechercher', value);
     case STEP3:
       return Local.setState('rechercher', changeStep(state, 3));
     default :
