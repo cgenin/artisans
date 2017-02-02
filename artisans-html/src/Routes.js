@@ -49,6 +49,11 @@ const notinitliazedyet = (location, callback) => {
   }, 'NotInitliazedYet')
 };
 
+const list = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/results/List').default)
+  }, 'List')
+};
 
 export default {
   index: {
@@ -95,7 +100,13 @@ export default {
       path: 'notinitliazedyet',
       component: notinitliazedyet,
       fullpath: '/results/notinitliazedyet',
-    }
+    },
+
+    list: {
+      path: 'list/:id/:lat/:lon/:codepostal',
+      component: list,
+      fullpath: (s, lat, lon, codepostal) => `/results/list/${s}/${lat}/${lon}/${codepostal}`,
+    },
   }
 
 }

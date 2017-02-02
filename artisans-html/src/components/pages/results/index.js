@@ -11,9 +11,14 @@ class Results extends Component {
     children: PropTypes.object,
   };
 
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+  }
+
   render() {
      return (
-      <div>
+      <div style={{width:'100%'}}>
         <Title render={(previousTitle) => `Résultats`} />
         {this.props.children}
       </div>

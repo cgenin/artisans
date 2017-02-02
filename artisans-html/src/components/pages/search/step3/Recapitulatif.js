@@ -27,18 +27,20 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const type = (lat, lon, adress) => {
-  if (lat === ''+adress.results.lat && lon === ''+adress.results.lon) {
+const type = (lat, lon, adress, geolocation) => {
+  if (lat === '' + adress.results.lat && lon === '' + adress.results.lon) {
     return {
       type: 'Adresse',
       lat, lon,
-      street: adress.results.street.label
+      street: adress.results.street.label,
+      citycode: adress.results.street.citycode
     };
   }
   return {
     type: 'GPS',
     lat, lon,
-    street: 'Votre position'
+    street: 'Votre position',
+    citycode: geolocation.results.street.citycode
   };
 
 };
@@ -66,9 +68,23 @@ class Recapitulatif extends Component {
       evt.preventDefault();
     }
     const key = this.props.rechercher.selected.key;
+
     this.props.onBack(this.props.rechercher.selected).then(
       () => this.context.router.push(Routes.search.step2.fullpath(key))
     );
+  }
+
+  onValidate(datas) {
+    return (evt) => {
+      if (evt) {
+        evt.preventDefault();
+      }
+      const key = this.props.rechercher.selected.key;
+      const lat = this.context.router.params.lat;
+      const lon = this.context.router.params.lon;
+      const codepostal = datas.citycode.substring(0, 2);
+      this.context.router.push(Routes.results.list.fullpath(key, lat, lon, codepostal))
+    };
   }
 
   render() {
@@ -105,8 +121,9 @@ class Recapitulatif extends Component {
             <div className="recap-results-item">
               Adresse :&nbsp;<strong>{datas.street}</strong>
             </div>
-            <Divider style={{marginBottom:'10px'}} />
-            <RaisedButton icon={<ActionDone />} fullWidth={true} primary={true} label="Valider" />
+            <Divider style={{marginBottom: '10px'}}/>
+            <RaisedButton icon={<ActionDone />} fullWidth={true} primary={true} label="Valider"
+                          onClick={this.onValidate(datas)}  />
           </div>
         </CardText>
         <CardActions className="rechercher-card-actions">

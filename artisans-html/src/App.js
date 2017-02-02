@@ -46,6 +46,7 @@ class App extends Component {
             <Redirect from={Routes.results.path} to={Routes.results.notiniatilized.fullpath}/>
             <Route path={Routes.results.path} getComponent={Routes.results.component}>
               <Route path={Routes.results.notiniatilized.path} getComponent={Routes.results.notiniatilized.component}/>
+              <Route path={Routes.results.list.path} getComponent={Routes.results.list.component}/>
             </Route>
           </Route>
         </Router>

@@ -16,15 +16,15 @@ export default function reducer(state = defaultState, action) {
   const cl = Object.assign({}, state);
   switch (action.type) {
     case DEB:
-      return defaultState;
+      return Local.setState('geolocation', defaultState);
     case START:
       cl.step = cl.CST_START;
-      return cl;
+      return Local.setState('geolocation', cl);
     case RESULTS:
       cl.step = cl.CST_RESULTS;
       const {lat, lon} = action;
       cl.results = {lat, lon};
-      return cl;
+      return Local.setState('geolocation', cl);
     case ERROR:
       cl.step = cl.CST_ERROR;
       const {msg} = action;
@@ -33,10 +33,9 @@ export default function reducer(state = defaultState, action) {
     case UPDATE:
       const {json} = action;
       if (json.features && json.features.length > 0) {
-
         cl.results.street = json.features[0].properties;
       }
-      return cl;
+      return Local.setState('geolocation', cl);
     default:
       return state;
   }
