@@ -8,8 +8,9 @@ import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 
-import {launch} from '../../../../redux/geolocation/actions'
-import MiniMap from './MiniMap';
+import {launch} from '../../../../../redux/geolocation/actions'
+import MiniMap from '../MiniMap';
+import StreetDiv from './StreetDiv';
 
 const mapStateToProps = (state) => {
   const {geolocation} = state;
@@ -31,15 +32,17 @@ const convert = (geol, onLaunch, onSelect) => {
         <CircularProgress size={80} thickness={5}/>
       );
     case geol.CST_RESULTS:
+      const {lat, lon} = geol.results;
       return (
         <Paper>
-          <MiniMap googleApi={geol.key.googleApi} lat={geol.results.lat} lon={geol.results.lon}/>
+          <MiniMap googleApi={geol.key.googleApi} lat={lat} lon={lon}/>
           <div className="geolocalisation-results-button-panel">
-            <strong>latitude : {geol.results.lat} / longitude : {geol.results.lon}</strong>
+            <strong>latitude : {lat} / longitude : {lon}</strong>
           </div>
+          <StreetDiv lat={lat} lon={lon}/>
           <div className="geolocalisation-results-button-panel">
             <FlatButton icon={<NavigationRefresh/>} onClick={onLaunch}/>
-            <RaisedButton label="Choisir" primary={true} onClick={() => onSelect(geol.results.lat, geol.results.lon)}/>
+            <RaisedButton label="Choisir" primary={true} onClick={() => onSelect(lat, lon)}/>
           </div>
         </Paper>
       );
@@ -80,7 +83,7 @@ class Geolocation extends Component {
 
   constructor(props) {
     super(props);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.shouldCocponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
   render() {

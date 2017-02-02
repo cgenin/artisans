@@ -28,11 +28,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const type = (lat, lon, adress) => {
-  if (lat === adress.results.lat && lon === adress.results.lon) {
+  if (lat === ''+adress.results.lat && lon === ''+adress.results.lon) {
     return {
       type: 'Adresse',
       lat, lon,
-      street: adress.results.street
+      street: adress.results.street.label
     };
   }
   return {

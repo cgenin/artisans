@@ -1,4 +1,4 @@
-import {DEB, START, RESULTS, ERROR} from './actions';
+import {DEB, START, RESULTS, ERROR, UPDATE} from './actions';
 import Local from '../../services/localforage';
 const key = require('../keys.json');
 
@@ -29,6 +29,13 @@ export default function reducer(state = defaultState, action) {
       cl.step = cl.CST_ERROR;
       const {msg} = action;
       cl.msg = msg;
+      return cl;
+    case UPDATE:
+      const {json} = action;
+      if (json.features && json.features.length > 0) {
+
+        cl.results.street = json.features[0].properties;
+      }
       return cl;
     default:
       return state;

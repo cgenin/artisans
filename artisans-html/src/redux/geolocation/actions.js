@@ -1,7 +1,10 @@
+import fetch from 'isomorphic-fetch';
+
 export const DEB = 'gps:debut';
 export const START = 'gps:START';
 export const ERROR = 'gps:err';
 export const RESULTS = 'gps:res';
+export const UPDATE = 'gps:update-street';
 
 function start() {
   return {
@@ -19,6 +22,12 @@ function error(msg) {
 function results(lat, lon) {
   return {
     type: RESULTS, lat, lon
+  }
+}
+
+function updateStreet(json) {
+  return {
+    type: UPDATE, json
   }
 }
 
@@ -52,4 +61,20 @@ export function launch() {
       dispatch(error(`La géolocalistion n'est pas supporté par votre appareil.`))
     }
   };
+}
+
+export function reverse(lat, lon) {
+  return (dispatch) => {
+    fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${lon}&lat=${lat}`)
+      .then(
+        res => {
+          if (res.status >= 400) {
+            console.error(res);
+            return Promise.reject(true);
+          }
+          return res.json();
+        }
+      )
+      .then(json => dispatch(updateStreet(json)));
+  }
 }

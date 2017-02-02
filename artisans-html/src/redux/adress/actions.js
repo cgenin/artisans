@@ -34,7 +34,7 @@ export function launch(position) {
 
   return (dispatch) => {
     dispatch(start(position));
-    const url = `http://api-adresse.data.gouv.fr/search/?q=${position.rue || ''} ${position.commune}&postcode=${position.codepostal}`
+    const url = `https://api-adresse.data.gouv.fr/search/?q=${position.rue || ''} ${position.commune}&postcode=${position.codepostal}`
     fetch(url).then(
       res => {
         if (res.status >= 400) {

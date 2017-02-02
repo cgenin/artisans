@@ -16,7 +16,7 @@ import Routes from '../../../../Routes';
 import {step3, step2} from '../../../../redux/rechercher/actions';
 import './OuSuisJe.css';
 import ThemeApp from '../../../ThemeApp';
-import Geolocation from './Geolocation';
+import Geolocation from './Geolocation/index';
 import Adresse from './Adresse';
 
 const mapStateToProps = (state) => {
