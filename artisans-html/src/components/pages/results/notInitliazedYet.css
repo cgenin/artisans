@@ -1,0 +1,111 @@
+
+.notif {
+    width: 420px;
+    height: 150px;
+    margin: 40px auto;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+.notif--success {
+    background: #39cccc;
+}
+.notif--error {
+    background: #d35757;
+}
+.notif__icon {
+    padding: 20px;
+    font-size: 56px;
+}
+.notif__content, .notif__actions {
+    height: 100%;
+    float: left;
+}
+.notif__content {
+    width: 85%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.notif__title {
+    margin-bottom: 0.2em;
+    font-size: 2em;
+}
+.notif__actions {
+    width: 15%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.4);
+}
+.notif__actions > * {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+.notif__action {
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
+.notif__action:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+.notif__action:hover:after {
+    display: block;
+}
+.notif__action:after {
+    content: attr(data-tooltip);
+    display: none;
+    position: absolute;
+    right: 110%;
+    top: 50%;
+    margin-top: -1em;
+    padding: 0.5em 1em;
+    text-align: center;
+    white-space: nowrap;
+    background: #141414;
+    border-radius: 4px;
+}
+.notif__action > * {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -12px;
+    margin-left: -12px;
+    font-size: 24px;
+}
+.notif a {
+    color: inherit;
+}
+
+@media screen and (max-width: 500px) {
+    .notif  {
+        width: 100%;
+        margin: auto;
+    }
+
+    .notif__content > div {
+        padding: 5px;
+    }
+
+    .notif__icon{
+        display: none;
+    }
+
+    .notif__actions{
+        /*width: ;*/
+    }
+}

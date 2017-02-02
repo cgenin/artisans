@@ -171,6 +171,8 @@ class Master extends Component {
       };
       styles.root.paddingLeft = 256;
       styles.footer.paddingLeft = 256;
+    } else {
+      styles.content.margin=12;
     }
 
     return (
@@ -202,30 +204,13 @@ class Master extends Component {
           />
           <FullWidthSection style={styles.footer}>
             <p style={prepareStyles(styles.p)}>
-              {'Hand crafted with love by the engineers at '}
-              <a style={styles.a} href="http://www.call-em-all.com/Careers">
-                Call-Em-All
+              {'@  2016 Niort, France - All Rights Reserved - '}
+              <a style={styles.a} href="http://www.">
+                Christophe Genin
               </a>
-              {' and our awesome '}
-              <a
-                style={prepareStyles(styles.a)}
-                href="https://github.com/callemall/material-ui/graphs/contributors"
-              >
-                contributors
-              </a>.
+
             </p>
-            <IconButton
-              iconStyle={styles.iconButton}
-              iconClassName="muidocs-icon-custom-github"
-              href="https://github.com/callemall/material-ui"
-            />
-            <p style={prepareStyles(styles.browserstack)}>
-              {'Thank you to '}
-              <a href="https://www.browserstack.com" style={prepareStyles(styles.browserstackLogo)} target="_blank">
-                <img role="presentation" src="http://www.browserstack.com/images/layout/logo.png" height="25" width="auto"/>
-              </a>
-              {' for providing real browser testing infrastructure.'}
-            </p>
+
           </FullWidthSection>
         </div>
       </MuiThemeProvider>

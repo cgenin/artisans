@@ -43,6 +43,13 @@ const results = (location, callback) => {
 };
 
 
+const notinitliazedyet = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/results/NotInitliazedYet').default)
+  }, 'NotInitliazedYet')
+};
+
+
 export default {
   index: {
     path: '/',
@@ -82,7 +89,13 @@ export default {
   results: {
     path: 'results',
     component: results,
-    fullpath: '/results'
+    fullpath: '/results',
+
+    notiniatilized: {
+      path: 'notinitliazedyet',
+      component: notinitliazedyet,
+      fullpath: '/results/notinitliazedyet',
+    }
   }
 
 }

@@ -34,6 +34,7 @@ class App extends Component {
           <Route path={Routes.index.path} component={Master}>
             <IndexRoute getComponent={Routes.index.component}/>
             <Route path={Routes.home.path}  getComponent={Routes.home.component}/>
+
             <Redirect from={Routes.search.path} to={Routes.search.step0.fullpath}/>
             <Route path={Routes.search.path} getComponent={Routes.search.component}>
               <Route path={Routes.search.step0.path} getComponent={Routes.search.step0.component}/>
@@ -41,7 +42,11 @@ class App extends Component {
               <Route path={Routes.search.step2.path} getComponent={Routes.search.step2.component}/>
               <Route path={Routes.search.step3.path} getComponent={Routes.search.step3.component}/>
             </Route>
-            <Route path={Routes.results.path} component={Routes.results.component}/>
+
+            <Redirect from={Routes.results.path} to={Routes.results.notiniatilized.fullpath}/>
+            <Route path={Routes.results.path} getComponent={Routes.results.component}>
+              <Route path={Routes.results.notiniatilized.path} getComponent={Routes.results.notiniatilized.component}/>
+            </Route>
           </Route>
         </Router>
       </Provider>
