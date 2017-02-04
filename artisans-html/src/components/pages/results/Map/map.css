@@ -48,7 +48,7 @@
 }
 
 .text-detail-button {
-
+    font-weight: bolder;
 }
 
 .button:hover,
@@ -115,5 +115,17 @@
     to {
         transform: scale(2);
         opacity: 0;
+    }
+}
+
+
+
+@media screen and (max-width: 500px) {
+    #google-map-container{
+        min-height: 90vh;
+        height: 90vh;
+        min-width: 90vw;
+        margin-left: 0;
+        margin-right: 0;
     }
 }

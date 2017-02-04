@@ -83,8 +83,8 @@ class Container extends Component {
     return (
       <Paper id="google-map-container">
         <Map google={this.props.google} onClick={this.onMapClicked}
-             containerStyle={{width: '60vw', height: '60vh', margin: 'auto', display: 'block'}}
-             initialCenter={center} center={center} className={'map'} zoom={10}>
+             containerStyle={{width: '100%', height: '100%', position: 'relative'}}
+             initialCenter={center} center={center} zoom={10}>
           <Marker name="Votre adresse" artisan={{isRef: true}} onClick={this.onMarkerClick} position={center}
                   icon={mainIcon}/>
           {arts}
@@ -92,7 +92,7 @@ class Container extends Component {
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
             onClose={this.onInfoWindowClose}>
-            <InfoWindowContainer selectedPlace={this.state.selectedPlace.artisan}  />
+            <InfoWindowContainer selectedPlace={this.state.selectedPlace.artisan}/>
           </InfoWindow>
         </Map>
       </Paper>
@@ -102,4 +102,4 @@ class Container extends Component {
 
 export default GoogleApiComponent({
   apiKey: keys.googleApi
-})(Container)
+})(Container);
