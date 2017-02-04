@@ -55,6 +55,12 @@ const list = (location, callback) => {
   }, 'List')
 };
 
+const map = (location, callback) => {
+  require.ensure([], require => {
+    callback(null, require('./components/pages/results/Map').default)
+  }, 'List')
+};
+
 export default {
   index: {
     path: '/',
@@ -106,6 +112,11 @@ export default {
       path: 'list/:id/:lat/:lon/:codepostal',
       component: list,
       fullpath: (s, lat, lon, codepostal) => `/results/list/${s}/${lat}/${lon}/${codepostal}`,
+    },
+    map: {
+      path: 'map/:id/:lat/:lon/:codepostal',
+      component: map,
+      fullpath: (s, lat, lon, codepostal) => `/results/map/${s}/${lat}/${lon}/${codepostal}`,
     },
   }
 

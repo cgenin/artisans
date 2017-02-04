@@ -14,4 +14,4 @@ build
 .env
 npm-debug.log
 
-src/redux/keys.json
+src/keys.json

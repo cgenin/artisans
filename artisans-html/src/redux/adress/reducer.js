@@ -1,7 +1,7 @@
 import {DEB, START, RESULTS, ERROR} from './actions';
 import Local from '../../services/localforage';
 
-const key = require('../keys.json');
+const key = require('../../keys.json');
 
 const defaultState = Local.initialize('adress', {
   CST_START: 1,

@@ -1,0 +1,25 @@
+.list-container {
+    max-width: 700px;
+    margin: auto;
+}
+
+#list-container-panel {
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#list-container-panel > .title {
+    text-align: center;
+}
+
+#list-container-panel, #list-container-panel > .buttons {
+    margin: 10px;
+}
+
+#list-container-panel > .buttons {
+    display: flex;
+    justify-content: space-around;
+}
+

@@ -4,7 +4,7 @@ import Title from 'react-title-component';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import withWidth from 'material-ui/utils/withWidth';
 
-
+import './index.css';
 
 class Results extends Component {
   static propTypes = {
@@ -17,9 +17,9 @@ class Results extends Component {
   }
 
   render() {
-     return (
-      <div style={{width:'100%'}}>
-        <Title render={(previousTitle) => `Résultats`} />
+    return (
+      <div style={{width: '100%'}}>
+        <Title render={(previousTitle) => `Résultats`}/>
         {this.props.children}
       </div>
     );

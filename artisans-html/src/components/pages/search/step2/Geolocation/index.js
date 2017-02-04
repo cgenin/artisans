@@ -83,7 +83,7 @@ class Geolocation extends Component {
 
   constructor(props) {
     super(props);
-    this.shouldCocponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
   render() {

@@ -1,9 +1,14 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d47a1">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" media="screen">
+
     <!--
       Notice the use of %PUBLIC_URL% in the tag above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -14,26 +19,32 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Artisans</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root">
-      <div style="width: 100%">
+</head>
+<body>
+<div id="root">
+    <div style="width: 100%">
         <h1 style="margin: auto">Chargement...</h1>
         <i class="material-icons" style="font-size: 15em;margin: auto">cached</i>
-      </div>
-
     </div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+</div>
+<!--
+  This HTML file is a template.
+  If you open it directly in the browser, you will see an empty page.
 
-      To begin the development, run `npm start`.
-      To create a production bundle, use `npm run build`.
-    -->
-  </body>
+  You can add webfonts, meta tags, or analytics to this file.
+  The build step will place the bundled scripts into the <body> tag.
+
+  To begin the development, run `npm start`.
+  To create a production bundle, use `npm run build`.
+-->
+
+<script>
+  (function () {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/artisans-service-worker.js');
+    }
+  })();
+</script>
+</body>
 </html>

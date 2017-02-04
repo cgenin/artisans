@@ -1,6 +1,6 @@
 import {DEB, START, RESULTS, ERROR, UPDATE} from './actions';
 import Local from '../../services/localforage';
-const key = require('../keys.json');
+const key = require('../../keys.json');
 
 const defaultState = Local.initialize('geolocation', {
   CST_START: 1,

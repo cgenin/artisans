@@ -14,12 +14,13 @@ import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import rechercher from './redux/rechercher/reducer';
 import geolocation from './redux/geolocation/reducer';
 import adress from './redux/adress/reducer';
+import near from './redux/near/reducer';
 
 injectTapEventPlugin();
 
 
 const rootReducer = combineReducers(Object.assign({}, {
-  rechercher, geolocation, adress
+  rechercher, geolocation, adress, near
 }));
 
 export const store = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development')
@@ -47,6 +48,7 @@ class App extends Component {
             <Route path={Routes.results.path} getComponent={Routes.results.component}>
               <Route path={Routes.results.notiniatilized.path} getComponent={Routes.results.notiniatilized.component}/>
               <Route path={Routes.results.list.path} getComponent={Routes.results.list.component}/>
+              <Route path={Routes.results.map.path} getComponent={Routes.results.map.component}/>
             </Route>
           </Route>
         </Router>
