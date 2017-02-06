@@ -11,7 +11,13 @@ import ActionAutorenew from 'material-ui/svg-icons/action/autorenew';
 import './list.css';
 import InnerList from './InnerList';
 import Routes from '../../../../Routes';
-import {mapStateToProps, mapDispatchToProps, callConponentDidMount} from '../../../../services/results';
+import {
+  mapStateToProps,
+  mapDispatchToProps,
+  callConponentDidMount,
+  goToMap,
+  gotoDetail
+} from '../../../../services/results';
 
 
 class List extends Component {
@@ -30,6 +36,7 @@ class List extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.onGoToUpdate = this.onGoToUpdate.bind(this);
     this.onGoToMap = this.onGoToMap.bind(this);
+    this.onGotoDetail = this.onGotoDetail.bind(this);
   }
 
   onGoToUpdate() {
@@ -37,8 +44,11 @@ class List extends Component {
   }
 
   onGoToMap() {
-    const {id, lat, lon, codepostal} =this.context.router.params;
-    this.context.router.push(Routes.results.map.fullpath(id, lat, lon, codepostal));
+    goToMap(this);
+  }
+
+  onGotoDetail() {
+    return gotoDetail(this);
   }
 
   componentDidMount() {
@@ -61,7 +71,7 @@ class List extends Component {
                             label="Carte"/>
               <FlatButton title="Recharger" icon={<ActionAutorenew />}/>
             </div>
-            <InnerList artisans={this.props.artisans}/>
+            <InnerList artisans={this.props.artisans} onGotoDetail={this.onGotoDetail()}/>
           </div>
         </Paper>
       </div>

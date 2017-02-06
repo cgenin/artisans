@@ -49,6 +49,7 @@ class App extends Component {
               <Route path={Routes.results.notiniatilized.path} getComponent={Routes.results.notiniatilized.component}/>
               <Route path={Routes.results.list.path} getComponent={Routes.results.list.component}/>
               <Route path={Routes.results.map.path} getComponent={Routes.results.map.component}/>
+              <Route path={Routes.results.detail.path} getComponent={Routes.results.detail.component}/>
             </Route>
           </Route>
         </Router>

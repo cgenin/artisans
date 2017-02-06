@@ -14,9 +14,29 @@ export const mapDispatchToProps = (dispatch) => {
   }
 };
 
+const floor = (num) => {
+  if (!num) {
+    return '';
+  }
+  const str = num.toFixed(10);
+  return str.substring(0, str.length - 7);
+};
+
+export const floorLabel = (art)=> `Distance extimée : ${floor(art.distance)} km.`;
+
 export const goToList = (obj) => {
   const {id, lat, lon, codepostal} =obj.context.router.params;
   obj.context.router.push(Routes.results.list.fullpath(id, lat, lon, codepostal));
+};
+
+export const goToMap = (obj) => {
+  const {id, lat, lon, codepostal} =obj.context.router.params;
+  obj.context.router.push(Routes.results.map.fullpath(id, lat, lon, codepostal));
+};
+
+export const gotoDetail = (obj) => {
+  const {id, lat, lon, codepostal} =obj.context.router.params;
+  return (index) => obj.context.router.push(Routes.results.detail.fullpath(id, lat, lon, codepostal, index));
 };
 
 export const callConponentDidMount = (obj) => {

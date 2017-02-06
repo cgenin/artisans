@@ -10,14 +10,8 @@ import ActionInfo from 'material-ui/svg-icons/action/info';
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle';
 import {red500, yellow600, green500} from 'material-ui/styles/colors';
 
+import {floorLabel} from '../../../../services/results'
 
-const floor = (num) => {
-  if (!num) {
-    return '';
-  }
-  const str = num.toFixed(10);
-  return str.substring(0, str.length - 7);
-};
 
 const dist2Color = (distance) => {
   if (distance) {
@@ -34,6 +28,7 @@ class InnerList extends Component {
 
   static propTypes = {
     artisans: PropTypes.object,
+    onGotoDetail: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -73,10 +68,10 @@ class InnerList extends Component {
     const arts = this.props.artisans.results
       .filter((a, i) => i <= this.state.limit)
       .map(
-        (art) => <ListItem key={art.redis} leftAvatar={
-          <Avatar backgroundColor={dist2Color(art.distance)} icon={<FileFolder />}/>}
-                           rightIcon={<ActionInfo />} primaryText={art.name}
-                           secondaryText={`Distance extimée : ${floor(art.distance)} km.`}/>
+        (art) => <ListItem key={art.redis}
+                           leftAvatar={  <Avatar backgroundColor={dist2Color(art.distance)} icon={<FileFolder />}/>}
+                           onClick={() => this.props.onGotoDetail(art.redis)} rightIcon={<ActionInfo />}
+                           primaryText={art.name} secondaryText={floorLabel(art)}/>
       );
     const button = (this.props.artisans.length === 0 || this.props.artisans.length <= this.state.limit) ?
       (<div></div>) : (

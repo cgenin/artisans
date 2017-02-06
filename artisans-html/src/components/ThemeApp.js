@@ -19,6 +19,9 @@ export default {
     }
   },
   drawer: {
-    header: {color: blue900}
+    header: {
+      color: blue900,
+      characterColor: white
+    }
   }
 }
