@@ -2,15 +2,14 @@ import React, {Component, PropTypes} from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import Paper from 'material-ui/Paper/Paper';
-import FlatButton from 'material-ui/FlatButton/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
-import MapsMap from 'material-ui/svg-icons/maps/map';
 import MapsDirectionsRun from 'material-ui/svg-icons/maps/directions-run';
 import ActionList from 'material-ui/svg-icons/action/list';
 
 import {mapDispatchToProps, callConponentDidMount, goToMap, goToList, floorLabel} from '../../../../services/results';
 import './detail.css';
 import Contact from './Contact';
+import Coords from './Coords';
 import ThemeApp from '../../../ThemeApp';
 
 
@@ -69,20 +68,7 @@ class Detail extends Component {
           <p>
             {floorLabel(selected)}
           </p>
-          <Paper className="inner-block">
-            <div>
-              <strong>Latitude</strong> : {selected.coords.lat}
-            </div>
-            <div>
-              <strong>Longitude</strong> : {selected.coords.lon}
-            </div>
-            <div>
-              <strong>Adresse Géolocalisée</strong> : {selected.coords.label}
-            </div>
-            <div>
-              <FlatButton icon={<MapsMap/>} secondary={true} label="Ouvrir dans Google map"/>
-            </div>
-          </Paper>
+        <Coords lat={selected.coords.lat} lon={selected.coords.lon} label={selected.coords.label} />
         </Paper>
         <Contact fax={selected.contact.fax} tel={selected.contact.tel}/>
         <div id="bottom-buttons-block" className="block">
