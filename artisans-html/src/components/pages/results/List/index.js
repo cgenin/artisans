@@ -7,10 +7,14 @@ import FlatButton from 'material-ui/FlatButton/FlatButton';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import MapsDirectionsRun from 'material-ui/svg-icons/maps/directions-run';
 import ActionAutorenew from 'material-ui/svg-icons/action/autorenew';
+import withWidth, {SMALL} from 'material-ui/utils/withWidth';
 
 import './list.css';
+import HelpModal from '../../../help-modal/HelpModal';
 import InnerList from './InnerList';
 import Routes from '../../../../Routes';
+import markdown from './list.md';
+
 import {
   mapStateToProps,
   mapDispatchToProps,
@@ -25,6 +29,7 @@ class List extends Component {
   static propTypes = {
     artisans: PropTypes.object,
     onLoad: PropTypes.func.isRequired,
+    width: PropTypes.number.isRequired,
   };
 
   static contextTypes = {
@@ -37,6 +42,7 @@ class List extends Component {
     this.onGoToUpdate = this.onGoToUpdate.bind(this);
     this.onGoToMap = this.onGoToMap.bind(this);
     this.onGotoDetail = this.onGotoDetail.bind(this);
+    this.onReload = this.onReload.bind(this);
   }
 
   onGoToUpdate() {
@@ -55,8 +61,14 @@ class List extends Component {
     callConponentDidMount(this);
   }
 
+  onReload() {
+    callConponentDidMount(this);
+  }
 
   render() {
+
+    const labelModifier = (this.props.width === SMALL) ? '' : 'Modifier';
+    const labelCarte = (this.props.width === SMALL) ? '' : 'Carte';
     return (
       <div className="list-container">
         <Paper transitionEnabled={true} style={{padding: 10}} zDepth={2}>
@@ -66,12 +78,15 @@ class List extends Component {
             </div>
             <div className="buttons">
               <RaisedButton data-tooltip="Modifier la recherche" onClick={this.onGoToUpdate} icon={<EditorModeEdit />}
-                            label="Modifier"/>
+                            label={labelModifier}/>
               <RaisedButton data-tooltip="Afficher la carte" onClick={this.onGoToMap} icon={<MapsDirectionsRun />}
-                            label="Carte"/>
-              <FlatButton title="Recharger" icon={<ActionAutorenew />}/>
+                            label={labelCarte}/>
+              <FlatButton title="Recharger" icon={<ActionAutorenew />} onClick={this.onReload}/>
             </div>
             <InnerList artisans={this.props.artisans} onGotoDetail={this.onGotoDetail()}/>
+            <div className="help-container">
+              <HelpModal text={markdown}/>
+            </div>
           </div>
         </Paper>
       </div>
@@ -79,4 +94,4 @@ class List extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(withWidth()(List));
