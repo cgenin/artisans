@@ -80,7 +80,7 @@ module.exports = {
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
     // https://github.com/facebookincubator/create-react-app/issues/290
-    extensions: ['.js', '.json', '.jsx', ''],
+    extensions: ['.js', '.json', '.jsx', '', '.md'],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -116,6 +116,7 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
+          /\.md$/,
           /\.json$/,
           /\.svg$/
         ],
@@ -154,6 +155,10 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json'
+      },
+      {
+        test: /\.md$/,
+        loader: 'raw-loader',
       },
       // "file" loader for svg
       {
@@ -244,13 +249,21 @@ module.exports = {
         stripPrefix: 'build/',
         staticFileGlobs: [
           "build/img/**.*",
-          "build/manifest.json",
+          "build/index.html",
+          "build/*.json",
+          "build/*.ico",
+          "build/*.js",
+          "build/static/css/**.*",
+          "build/static/js/**.*",
+          "build/static/media/**.*",
+          "build/index.html",
         ],
-        runtimeCaching:[{
+        navigateFallback: '/index.html',
+        runtimeCaching: [{
           urlPattern: /^https:\/\/artisans\.christophe\-genin\.net\/api/,
           handler: 'networkFirst'
-        },{
-          urlPattern:/https?:\/\/fonts.+/,
+        }, {
+          urlPattern: /https?:\/\/fonts.+/,
           handler: 'fastest',
         }]
       }
