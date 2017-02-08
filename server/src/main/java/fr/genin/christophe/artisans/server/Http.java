@@ -2,6 +2,7 @@ package fr.genin.christophe.artisans.server;
 
 import fr.genin.christophe.artisans.server.number.Doubles;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Handler;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
@@ -11,12 +12,19 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.StaticHandler;
+import rx.Observable;
+import rx.schedulers.Schedulers;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -26,10 +34,12 @@ import java.util.stream.Collectors;
 public class Http extends AbstractVerticle {
 
     private static final Logger logger = LoggerFactory.getLogger(Http.class);
+    private final String ETAG_INDEX_PAGE = UUID.randomUUID().toString();
 
     @Override
     public void start() throws Exception {
         final int port = config().getInteger("port", 8888);
+        final String host = config().getString("host", "localhost");
 
         final HttpServer httpServer = vertx.createHttpServer(new HttpServerOptions().setCompressionSupported(true));
 
@@ -49,15 +59,53 @@ public class Http extends AbstractVerticle {
         artisanAPI.mountSubRouter("/type", artisanTypeAPI);
         restAPI.mountSubRouter("/artisan", artisanAPI);
         router.mountSubRouter("/api", restAPI);
+
+        router.route("/home/*").handler(indexTemplateReader());
+        router.route("/results/*").handler(indexTemplateReader());
+        router.route("/search/*").handler(indexTemplateReader());
+
         router.route("/*")
                 .handler(StaticHandler.create("build")
                         .setCachingEnabled(true)
                         .setFilesReadOnly(true)
                 );
 
+        logger.info("port : " + port);
+        logger.info("host : " + host);
 
-        httpServer.requestHandler(router::accept).listen(port);
+        httpServer.requestHandler(router::accept)
+                .listen(port, host);
         logger.info("Http server launched !");
+    }
+
+    private Handler<RoutingContext> indexTemplateReader() {
+        return rc ->
+                Observable.fromCallable(
+                        () -> Http.class.getClassLoader().getResourceAsStream("build/index.html")
+                )
+                        .map(
+                                input -> {
+                                    try (BufferedReader buffer = new BufferedReader(new InputStreamReader(input))) {
+                                        return buffer.lines().collect(Collectors.joining(""));
+                                    } catch (IOException e) {
+                                        throw new IllegalStateException(e);
+                                    }
+                                }
+                        )
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(
+                                (s) -> rc.response()
+                                        .setStatusCode(200)
+                                        .putHeader(HttpHeaders.CONTENT_TYPE, "text/html;charset=UTF-8")
+                                        .putHeader(HttpHeaders.ETAG, ETAG_INDEX_PAGE)
+                                        .end(s),
+                                (e) -> {
+                                    logger.error("Error in getting html page", e);
+                                    rc.response()
+                                            .setStatusCode(500)
+                                            .end();
+                                }
+                        );
     }
 
 
@@ -89,6 +137,7 @@ public class Http extends AbstractVerticle {
 
         });
     }
+
 
     private void getAllTypes(Consumer<JsonArray> consumer) {
         vertx.eventBus().<JsonArray>send(Artisans.TYPE_ARTISANS, new JsonObject(), msg -> {
