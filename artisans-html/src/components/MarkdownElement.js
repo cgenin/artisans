@@ -45,11 +45,14 @@ class MarkdownElement extends Component {
     } = this.props;
 
     /* eslint-disable react/no-danger */
+
+    const html = marked(text);
+    console.log(html);
     return (
       <div
         style={Object.assign({}, styles.root, style)}
         className="markdown-body"
-        dangerouslySetInnerHTML={{__html: marked(text)}}
+        dangerouslySetInnerHTML={{__html: html}}
       />
     );
     /* eslint-enable */

@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 
 import SearchLayout from '../SearchLayout';
 import HelpModal from '../../../help-modal/HelpModal';
-import search from '../rechercher.md';
+import search from './rechercher-step3.md';
 import rechercherImg from './ousuisje-bubble.svg';
 import Routes from '../../../../Routes';
 import {step3, step2} from '../../../../redux/rechercher/actions';

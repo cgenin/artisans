@@ -1,4 +1,4 @@
-import {STEP0, STEP1, STEP2, STEP3} from './actions';
+import {STEP0, STEP1, STEP2, STEP3, AWAIT} from './actions';
 import Local from '../../services/localforage';
 
 const defaultState = Local.initialize('rechercher', {
@@ -7,7 +7,8 @@ const defaultState = Local.initialize('rechercher', {
   search: '',
   length: 0,
   selected: {},
-  match: []
+  match: [],
+  awaiting: false,
 });
 
 const flatten = list => list.reduce(
@@ -24,9 +25,14 @@ export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case STEP0:
       return changeStep(state, 0);
+    case AWAIT:
+      const cl = Object.assign({}, state);
+      cl.awaiting = true;
+      return cl;
     case STEP1:
       const changeStep2 = changeStep(state, 1);
       changeStep2.search = action.search;
+      changeStep2.awaiting = false;
       changeStep2.artisans = flatten(action.artisans
         .map(a => a.keywords
           .map(v => {

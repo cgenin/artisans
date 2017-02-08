@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 
 import SearchLayout from '../SearchLayout'
 import HelpModal from '../../../help-modal/HelpModal'
-import search from '../rechercher.md';
+import rechercherMd from './rechercher-step0.md';
 import rechercherImg from './rechercher-bubble.svg';
 import Routes from '../../../../Routes';
 import {step1} from '../../../../redux/rechercher/actions';
@@ -64,7 +64,8 @@ class Rechercher extends Component {
 
   render() {
     return (
-      <SearchLayout title="Rechercher">
+      <form onSubmit={this.onSubmit}>
+        <SearchLayout title="Rechercher">
           <CardMedia>
             <img alt="Que recherchez vous ?" src={rechercherImg} width={264} height={272}/>
           </CardMedia>
@@ -74,11 +75,12 @@ class Rechercher extends Component {
                        fullWidth={true}/>
           </CardText>
           <CardActions className="rechercher-card-actions">
-            <HelpModal text={search}/>
-            <RaisedButton primary={true} label="Suivant" onClick={this.onSubmit}
+            <HelpModal text={rechercherMd}/>
+            <RaisedButton primary={true} label="Suivant" type="submit"
                           disabled={this.state.search.length === 0 }/>
           </CardActions>
-      </SearchLayout>
+        </SearchLayout>
+      </form>
     );
   }
 }

@@ -3,6 +3,7 @@ export const STEP0 = 'rechercher:step0';
 export const STEP1 = 'rechercher:step1';
 export const STEP2 = 'rechercher:step2';
 export const STEP3 = 'rechercher:step3';
+export const AWAIT = 'rechercher:AWAIT';
 
 export function step0() {
   return dispatch => {
@@ -13,9 +14,15 @@ export function step0() {
   };
 }
 
+function awaiting() {
+  return {
+    type: AWAIT
+  }
+}
 
 export function step1(search) {
   return dispatch => {
+    dispatch(awaiting());
     return Api.get('/api/artisan/type')
       .then(artisans => dispatch({type: STEP1, search, artisans}));
   };

@@ -1,28 +1,27 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import  CardActions  from 'material-ui/Card/CardActions';
-import  CardText from 'material-ui/Card/CardText';
+import CardActions from 'material-ui/Card/CardActions';
+import CardText from 'material-ui/Card/CardText';
+import CircularProgress from 'material-ui/CircularProgress/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
-import List  from 'material-ui/List/List';
-import  ListItem from 'material-ui/List/ListItem';
-import  Divider from 'material-ui/Divider/Divider';
+import List from 'material-ui/List/List';
+import ListItem from 'material-ui/List/ListItem';
+import Divider from 'material-ui/Divider/Divider';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import NavigationMoreHoriz from 'material-ui/svg-icons/navigation/more-horiz';
-
 import SearchLayout from '../SearchLayout';
 import HelpModal from '../../../help-modal/HelpModal';
-import rechercher from '../rechercher.md';
+import rechercher from './rechercher-step1.md';
 import Routes from '../../../../Routes';
-import ThemeApp from '../../../ThemeApp';
 import {step0, step1, step2} from '../../../../redux/rechercher/actions';
 
 
 const mapStateToProps = (state, ownProps) => {
-  const {search, artisans, match, length} = state.rechercher;
+  const {search, artisans, match, length, awaiting} = state.rechercher;
 
-  return {search, artisans, match, length};
+  return {search, artisans, match, length, awaiting};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -43,6 +42,7 @@ class SelectionRechercher extends Component {
     artisans: PropTypes.array.isRequired,
     match: PropTypes.array.isRequired,
     length: PropTypes.number.isRequired,
+    await: PropTypes.bool.isRequired,
   };
 
   static contextTypes = {
@@ -90,6 +90,15 @@ class SelectionRechercher extends Component {
   }
 
   render() {
+
+    if(this.props.awaiting){
+      return (
+        <div className="rechercher-card-awaiting">
+          <CircularProgress size={80} thickness={5} />
+        </div>
+      );
+    }
+
     const title = `Recherche de : '${this.props.search}'`;
     const res = this.props.match.map((a, i) =>
       <ListItem key={i} primaryText={ `Mot clé : ${a.label}` } leftIcon={  <ContentSend  />}
@@ -117,16 +126,16 @@ class SelectionRechercher extends Component {
       </div>);
     return (
       <SearchLayout title={title} subtitle={`${this.props.length} résultat(s)`}>
-          <CardText className="selection-rechercher-container">
-            <List>{res}</List>
-            <Divider/>
-            {all}
-          </CardText>
-          <CardActions className="rechercher-card-actions">
-            <HelpModal text={rechercher}/>
-            <RaisedButton label="Précédent" onClick={this.onBack}/>
-          </CardActions>
-        </SearchLayout>
+        <CardText className="selection-rechercher-container">
+          <List>{res}</List>
+          <Divider/>
+          {all}
+        </CardText>
+        <CardActions className="rechercher-card-actions">
+          <HelpModal text={rechercher}/>
+          <RaisedButton label="Précédent" onClick={this.onBack}/>
+        </CardActions>
+      </SearchLayout>
     );
   }
 }

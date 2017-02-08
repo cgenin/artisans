@@ -11,7 +11,8 @@ import ActionDone from 'material-ui/svg-icons/action/done';
 import SearchLayout from '../SearchLayout';
 import HelpModal from '../../../help-modal/HelpModal';
 import Routes from '../../../../Routes';
-import search from '../rechercher.md';
+
+import search from './rechercher-step3.md';
 import {step2} from '../../../../redux/rechercher/actions';
 
 const mapStateToProps = (state) => {

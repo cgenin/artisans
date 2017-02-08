@@ -30,7 +30,7 @@ class HelpModal extends Component {
                 <IconButton tooltip="Aide" onTouchTap={this.handleOpen}>
                     <ActionHelpOutline />
                 </IconButton>
-                <Dialog title="De l'aide ?"
+                <Dialog title="De l'aide ?" autoScrollBodyContent={true}
                         actions={ <FlatButton label="Fermer" onTouchTap={this.handleClose}/>}
                         modal={false} open={this.state.open} onRequestClose={this.handleClose}>
                     <MarkdownElement text={this.props.text}/>
