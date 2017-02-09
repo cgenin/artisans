@@ -1,14 +1,14 @@
 import React, {Component, PropTypes} from 'react';
 import HomeFeature from './HomeFeature';
-import FullWidthSection from '../FullWidthSection';
+import FullWidthSection from '../../FullWidthSection';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import withWidth, {LARGE} from 'material-ui/utils/withWidth';
 import typography from 'material-ui/styles/typography';
-import ThemeApp from '../ThemeApp';
+import ThemeApp from '../../ThemeApp';
 import {grey200, darkWhite, white} from 'material-ui/styles/colors';
 
-import Routes from '../../Routes';
-import 'font-awesome/css/font-awesome.css';
+import Routes from '../../../Routes';
+import './home.css';
 
 class HomePage extends Component {
 
@@ -25,10 +25,6 @@ class HomePage extends Component {
       root: {
         backgroundColor: ThemeApp.drawer.header.color,
         overflow: 'hidden',
-      },
-      imgContainer: {
-        display: 'flex',
-        justifyContent: 'center'
       },
       svgLogo: {
         // marginLeft: window.innerWidth * 0.5 - 130,
@@ -87,7 +83,7 @@ class HomePage extends Component {
 
     return (
       <FullWidthSection style={styles.root}>
-        <div style={styles.imgContainer}>
+        <div id="img-container">
           <img role="presentation" style={styles.svgLogo} src="/img/landing.jpg"/>
         </div>
         <div style={styles.tagline}>
@@ -198,14 +194,14 @@ class HomePage extends Component {
         <RaisedButton
           label="Facebook"
           primary={true}
-          icon={<i className="fa fa-facebook-square fa-2x" aria-hidden="true" style={{color: white}} />}
+          icon={<i className="icon-facebook fa-2x" aria-hidden="true" style={{color: white}} />}
           href="https://github.com/callemall/material-ui"
           style={styles.button}
         />
         <RaisedButton
           label="Twitter"
           primary={true}
-          icon={<i className="fa fa-twitter-square fa-2x" aria-hidden="true" style={{color: white}} />}
+          icon={<i className="icon-twitter fa-2x" aria-hidden="true" style={{color: white}} />}
           href="https://github.com/callemall/material-ui"
           style={styles.button}
         />

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import  Paper from 'material-ui/Paper/Paper';
 import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
+import Divider from 'material-ui/Divider/Divider';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import MapsDirectionsRun from 'material-ui/svg-icons/maps/directions-run';
 import ActionAutorenew from 'material-ui/svg-icons/action/autorenew';
@@ -67,8 +68,9 @@ class List extends Component {
 
   render() {
 
-    const labelModifier = (this.props.width === SMALL) ? '' : 'Modifier';
-    const labelCarte = (this.props.width === SMALL) ? '' : 'Carte';
+    const small = this.props.width === SMALL;
+    const labelModifier = (small) ? '' : 'Modifier';
+    const labelCarte = (small) ? '' : 'Carte';
     return (
       <div className="list-container">
         <Paper transitionEnabled={true} style={{padding: 10}} zDepth={2}>
@@ -83,7 +85,8 @@ class List extends Component {
                             label={labelCarte}/>
               <FlatButton title="Recharger" icon={<ActionAutorenew />} onClick={this.onReload}/>
             </div>
-            <InnerList artisans={this.props.artisans} onGotoDetail={this.onGotoDetail()}/>
+            <InnerList artisans={this.props.artisans} small={small} onGotoDetail={this.onGotoDetail()}/>
+            <Divider/>
             <div className="help-container">
               <HelpModal text={markdown}/>
             </div>

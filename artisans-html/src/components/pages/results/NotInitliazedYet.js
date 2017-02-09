@@ -1,7 +1,11 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import ActionSearch from 'material-ui/svg-icons/action/search';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import {darkWhite} from 'material-ui/styles/colors';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import './notInitliazedYet.css';
+import ErrorView from '../../notify-view/ErrorView';
 import Routes from '../../../Routes';
 
 class NotInitliazedYet extends Component {
@@ -13,22 +17,16 @@ class NotInitliazedYet extends Component {
 
   render() {
     return (
-      <div style={{width: '100%'}}>
-        <div className="notif notif--error">
-          <div className="notif__content">
-            <i className="material-icons notif__icon">error</i>
-            <div>
-              <h1 className="notif__title">Pas de données</h1><span className="notif__subtitle">Vous devez d'abord cliquez sur rechercher avant de sélectionner un artisan.</span>
-            </div>
-          </div>
-          <div className="notif__actions">
-            <a data-tooltip="Rechercher" className="notif__action" href={Routes.search.fullpath}>
-              <i className="material-icons">search</i>
-            </a>
-            <a data-tooltip="Accueil" className="notif__action" href={Routes.index.path}><i className="material-icons">home</i></a>
-          </div>
-        </div>
-      </div>
+      <ErrorView title="Pas de données"
+                 subtitle="Vous devez d'abord cliquez sur rechercher avant de sélectionner un artisan.">
+        <Link title="Rechercher" className="notif__action without-tooltip" to={Routes.search.fullpath}>
+          <ActionSearch style={{color: darkWhite}}/>
+        </Link>
+        <Link title="Accueil" className="notif__action without-tooltip" to={Routes.index.path}>
+          <ActionHome style={{color: darkWhite}}/>
+        </Link>
+      </ErrorView>
+
     );
   }
 }

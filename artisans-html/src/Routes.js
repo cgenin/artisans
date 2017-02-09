@@ -1,6 +1,6 @@
 const home = (location, callback) => {
   require.ensure([], require => {
-    callback(null, require('./components/pages/Home').default)
+    callback(null, require('./components/pages/home/Home').default)
   }, 'Home')
 };
 

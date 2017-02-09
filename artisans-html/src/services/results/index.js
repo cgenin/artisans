@@ -22,7 +22,7 @@ const floor = (num) => {
   return str.substring(0, str.length - 7);
 };
 
-export const floorLabel = (art)=> `Distance extimée : ${floor(art.distance)} km.`;
+export const floorLabel = (art, small) => (small) ? `~ ${floor(art.distance)} km` : `Distance extimée : ${floor(art.distance)} km.`;
 
 export const goToList = (obj) => {
   const {id, lat, lon, codepostal} =obj.context.router.params;

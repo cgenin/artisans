@@ -100,12 +100,12 @@ class AppNavDrawer extends Component {
           onChange={this.handleRequestChangeLink}
         >
           <Subheader>Resources</Subheader>
-          <ListItem primaryText="GitHub" value="https://github.com/callemall/material-ui"/>
-          <ListItem primaryText="React" value="http://facebook.github.io/react"/>
-          <ListItem
-            primaryText="Material Design"
-            value="https://www.google.com/design/spec/material-design/introduction.html"
-          />
+          <ListItem primaryText="GitHub" alt="Github du développeur" value="https://github.com/cgenin"/>
+          {/*<ListItem primaryText="React" value="http://facebook.github.io/react"/>*/}
+          {/*<ListItem*/}
+            {/*primaryText="Material Design"*/}
+            {/*value="https://www.google.com/design/spec/material-design/introduction.html"*/}
+          {/*/>*/}
         </SelectableList>
       </Drawer>
     );

@@ -28,7 +28,8 @@ class InnerList extends Component {
 
   static propTypes = {
     artisans: PropTypes.object,
-    onGotoDetail: PropTypes.func.isRequired
+    onGotoDetail: PropTypes.func.isRequired,
+    small: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -71,7 +72,7 @@ class InnerList extends Component {
         (art) => <ListItem key={art.redis}
                            leftAvatar={  <Avatar backgroundColor={dist2Color(art.distance)} icon={<FileFolder />}/>}
                            onClick={() => this.props.onGotoDetail(art.redis)} rightIcon={<ActionInfo />}
-                           primaryText={art.name} secondaryText={floorLabel(art)}/>
+                           primaryText={art.name} secondaryText={floorLabel(art, this.props.small)}/>
       );
     const button = (this.props.artisans.length === 0 || this.props.artisans.length <= this.state.limit) ?
       (<div></div>) : (

@@ -1,21 +1,17 @@
 import React, {Component, PropTypes} from 'react';
 import Title from 'react-title-component';
 import AppBar from 'material-ui/AppBar/AppBar';
-import IconButton from 'material-ui/IconButton/IconButton';
 import spacing from 'material-ui/styles/spacing';
 import {darkWhite, lightWhite, grey900, white} from 'material-ui/styles/colors';
 import AppNavDrawer from './AppNavDrawer';
 import FullWidthSection from './FullWidthSection';
 import withWidth, {MEDIUM, LARGE} from 'material-ui/utils/withWidth';
-import ActionBuild from 'material-ui/svg-icons/action/build';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import ThemeApp from './ThemeApp';
 
-const iconStyles = {
-  margin: 10,
-  color: white
-};
+import ThemeApp from './ThemeApp';
+import OnlineChecker from './OnlineChecker';
+
 
 class Master extends Component {
   static propTypes = {
@@ -180,10 +176,7 @@ class Master extends Component {
         <div>
           <Title render="Artisans"/>
           <AppBar onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
-                  title={title} zDepth={1} iconElementRight={
-            <ActionBuild style={iconStyles}/>
-          }
-                  style={styles.appBar} showMenuIconButton={showMenuIconButton}/>
+                  title={title} zDepth={1} iconElementRight={ <OnlineChecker />  }  style={styles.appBar} showMenuIconButton={showMenuIconButton}/>
           { title !== '' ?
             <div style={prepareStyles(styles.root)}>
               <div style={prepareStyles(styles.content)}>
